@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tijaramart/constants/global_variables.dart';
+import 'package:tijaramart/features/auth/screens/auth_screen.dart';
+import 'package:tijaramart/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,6 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: const ColorScheme.light(
           primary: GlobalVariables.secondaryColor,
@@ -25,22 +28,8 @@ class MyApp extends StatelessWidget {
           )
         )
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Hello"),
-        ),
-        body: Column(
-          children: [
-            const Center(
-              child: Text('Flutter Demo Home Page'),
-              ),
-              ElevatedButton(
-                onPressed: () {}, 
-                child: const Text("Click"),
-                ),
-          ],
-        ),
-        ),
+      home: const AuthScreen(),
+        onGenerateRoute: (settings) => generateRoute(settings),
     );
   }
 }
