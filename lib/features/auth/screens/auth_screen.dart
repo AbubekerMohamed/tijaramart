@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tijaramart/common/components/custom_button.dart';
 import 'package:tijaramart/common/components/custom_textfield.dart';
 import 'package:tijaramart/constants/global_variables.dart';
+import 'package:tijaramart/features/auth/services/auth_service.dart';
 
 enum Auth {
   signin,
@@ -20,6 +21,7 @@ class _AuthScreenState extends State<AuthScreen> {
   Auth _auth = Auth.signup;
   final _signUpFormKey = GlobalKey<FormState>();
   final _signInFormKey = GlobalKey<FormState>();
+  final AuthService authService = AuthService();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -28,59 +30,61 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            const Text(
-              "Welcome",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      _auth = Auth.signup;
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: _auth == Auth.signup
-                        ? GlobalVariables.secondaryColor
-                        : Colors.black38,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              const Text(
+                "Welcome",
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _auth = Auth.signup;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: _auth == Auth.signup
+                            ? GlobalVariables.secondaryColor
+                            : Colors.black,
+                        backgroundColor: _auth == Auth.signup
+                            ? Colors.black38
+                            : Colors.transparent,
+                      ),
+                      child: const Text("Sign Up"),
+                    ),
                   ),
-                  child: const Row(
-                    children: [
-                      Text("Sign Up"),
-                    ],
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _auth = Auth.signin;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: _auth == Auth.signin
+                            ? GlobalVariables.secondaryColor
+                            : Colors.black,
+                        backgroundColor: _auth == Auth.signin
+                            ? Colors.black38
+                            : Colors.transparent,
+                      ),
+                      child: const Text("Sign In"),
+                    ),
                   ),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      _auth = Auth.signin;
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: _auth == Auth.signin
-                        ? GlobalVariables.secondaryColor
-                        : Colors.black38,
-                  ),
-                  child: const Row(
-                    children: [
-                      Text("Sign In"),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            if (_auth == Auth.signup)
-              Container(
-                padding: const EdgeInsets.all(8),
-                color: GlobalVariables.greyBackgroundCOlor,
-                child: Form(
+                ],
+              ),
+              if (_auth == Auth.signup)
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: GlobalVariables.greyBackgroundCOlor,
+                  child: Form(
                     key: _signUpFormKey,
                     child: Column(
                       children: [
@@ -107,16 +111,21 @@ class _AuthScreenState extends State<AuthScreen> {
                         ),
                         CustomButton(
                           text: "Sign Up",
-                          onPressed: () {},
+                          onPressed: () {
+                            if (_signUpFormKey.currentState!.validate()) {
+                              signUpUser();
+                            }
+                          },
                         )
                       ],
-                    )),
-              ),
-            if (_auth == Auth.signin)
-              Container(
-                padding: const EdgeInsets.all(8),
-                color: GlobalVariables.greyBackgroundCOlor,
-                child: Form(
+                    ),
+                  ),
+                ),
+              if (_auth == Auth.signin)
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: GlobalVariables.greyBackgroundCOlor,
+                  child: Form(
                     key: _signInFormKey,
                     child: Column(
                       children: [
@@ -139,17 +148,29 @@ class _AuthScreenState extends State<AuthScreen> {
                           onPressed: () {},
                         )
                       ],
-                    )),
-              ),
-          ],
+                    ),
+                  ),
+                ),
+            ],
+          ),
         ),
-      )),
+      ),
     );
+  }
+
+  void signUpUser() {
+    authService.signUpUser(
+        context: context,
+        name: _nameController.text,
+        email: _emailController.text,
+        password: _passwordController.text);
   }
 
   @override
   void dispose() {
     _emailController.dispose();
+    _nameController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 }
