@@ -7,6 +7,7 @@ enum Auth {
   signin,
   signup,
 }
+
 class AuthScreen extends StatefulWidget {
   static const String routeName = "/auth-screen";
   const AuthScreen({super.key});
@@ -21,105 +22,128 @@ class _AuthScreenState extends State<AuthScreen> {
   final _signInFormKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
- final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              const Text(
-                "Welcome",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
-              ),
-              ListTile(
-                tileColor: _auth == Auth.signup ? GlobalVariables.greyBackgroundCOlor : Colors.transparent,
-                title: const Text("Create Account",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                leading: Radio(
-                  value: Auth.signup, 
-                  groupValue: _auth, 
-                  onChanged: (Auth? val){
+          child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            const Text(
+              "Welcome",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
                     setState(() {
-                      _auth = val!;
+                      _auth = Auth.signup;
                     });
                   },
-                  activeColor: GlobalVariables.secondaryColor,
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: _auth == Auth.signup
+                        ? GlobalVariables.secondaryColor
+                        : Colors.black38,
+                  ),
+                  child: const Row(
+                    children: [
+                      Text("Sign Up"),
+                    ],
+                  ),
                 ),
-              ),
-              if(_auth == Auth.signup) Container(
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _auth = Auth.signin;
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: _auth == Auth.signin
+                        ? GlobalVariables.secondaryColor
+                        : Colors.black38,
+                  ),
+                  child: const Row(
+                    children: [
+                      Text("Sign In"),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            if (_auth == Auth.signup)
+              Container(
                 padding: const EdgeInsets.all(8),
                 color: GlobalVariables.greyBackgroundCOlor,
                 child: Form(
-                  key: _signUpFormKey,
-                  child: Column(
-                    children: [
-                      CustomTextField(
-                        editingController: _nameController,
-                        hintText: "Full Name",
-                      ),
-                      const SizedBox(height: 10,),
-                      CustomTextField(
-                        editingController: _emailController,
-                        hintText: "E Mail",
-                      ),
-                      const SizedBox(height: 10,),
-                      CustomTextField(
-                        editingController: _passwordController,
-                        hintText: "Password",
-                      ),
-                      const SizedBox(height: 10,),
-                      CustomButton(text: "Sign Up", onPressed: (){},)
-                    ],
-                  )
-                  ),
+                    key: _signUpFormKey,
+                    child: Column(
+                      children: [
+                        CustomTextField(
+                          editingController: _nameController,
+                          hintText: "Full Name",
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomTextField(
+                          editingController: _emailController,
+                          hintText: "E Mail",
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomTextField(
+                          editingController: _passwordController,
+                          hintText: "Password",
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomButton(
+                          text: "Sign Up",
+                          onPressed: () {},
+                        )
+                      ],
+                    )),
               ),
-              ListTile(
-                tileColor: _auth == Auth.signin ? GlobalVariables.greyBackgroundCOlor : Colors.transparent,
-                title: const Text("Sign In",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                leading: Radio(
-                  value: Auth.signin, 
-                  groupValue: _auth, 
-                  onChanged: (Auth? val){
-                    setState(() {
-                      _auth = val!;
-                    });
-                  },
-                  activeColor: GlobalVariables.secondaryColor,
-                ),
-              ),
-              if(_auth == Auth.signin) Container(
+            if (_auth == Auth.signin)
+              Container(
                 padding: const EdgeInsets.all(8),
                 color: GlobalVariables.greyBackgroundCOlor,
                 child: Form(
-                  key: _signUpFormKey,
-                  child: Column(
-                    children: [
-                      CustomTextField(
-                        editingController: _emailController,
-                        hintText: "E Mail",
-                      ),
-                      const SizedBox(height: 10,),
-                      CustomTextField(
-                        editingController: _passwordController,
-                        hintText: "Password",
-                      ),
-                      const SizedBox(height: 10,),
-                      CustomButton(text: "Sign Up", onPressed: (){},)
-                    ],
-                  )
-                  ),
+                    key: _signInFormKey,
+                    child: Column(
+                      children: [
+                        CustomTextField(
+                          editingController: _emailController,
+                          hintText: "E Mail",
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomTextField(
+                          editingController: _passwordController,
+                          hintText: "Password",
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomButton(
+                          text: "Sign In",
+                          onPressed: () {},
+                        )
+                      ],
+                    )),
               ),
-            ],
-          ),
-        )
+          ],
         ),
+      )),
     );
   }
 
