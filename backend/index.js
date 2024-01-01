@@ -12,6 +12,7 @@ const DB_URL =
 const app = express();
 
 // configure middlewares
+app.use(express.json()); // for serialization
 app.use(authRouter);
 
 // establish connections
