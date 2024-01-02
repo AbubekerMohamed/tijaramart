@@ -1,11 +1,15 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tijaramart/common/components/snackbar.dart';
 import 'package:tijaramart/constants/error_handlers.dart';
 import 'package:tijaramart/constants/global_variables.dart';
+import 'package:tijaramart/features/home/screens/home_screen.dart';
 import 'package:tijaramart/models/user_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:tijaramart/providers/user_provider.dart';
 
 class AuthService {
   // signup user
@@ -73,8 +77,14 @@ class AuthService {
       httpErrorHandle(
         response: res,
         context: context,
-        onSuccess: () {
-          print(res.body);
+        onSuccess: () async {
+          SharedPreferences sharedPreferences =
+              await SharedPreferences.getInstance();
+          Provider.of<UserProvider>(context, listen: false).setUser(res.body);
+          sharedPreferences.setString(
+              "x-auth-token", jsonDecode(res.body)['token']);
+          Navigator.pushNamedAndRemoveUntil(
+              context, HomeScreen.routeName, (route) => false);
         },
       );
     } catch (error) {
