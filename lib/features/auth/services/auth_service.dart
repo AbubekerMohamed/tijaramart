@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:tijaramart/common/components/snackbar.dart';
 import 'package:tijaramart/constants/error_handlers.dart';
@@ -39,6 +41,40 @@ class AuthService {
             context,
             "Account Registerd Successfully.",
           );
+        },
+      );
+    } catch (error) {
+      // ignore: use_build_context_synchronously
+      showSnackBar(
+        context,
+        error.toString(),
+      );
+    }
+  }
+
+  // sign in user
+  void signInUser({
+    required BuildContext context,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      //make the post request
+      http.Response res = await http.post(Uri.parse('$backendURL/api/signin'),
+          body: jsonEncode({
+            "email": email,
+            "password": password,
+          }),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8'
+          });
+
+      // ignore: use_build_context_synchronously
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+          print(res.body);
         },
       );
     } catch (error) {
