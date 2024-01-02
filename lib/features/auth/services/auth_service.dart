@@ -24,7 +24,7 @@ class AuthService {
           role: "",
           token: "");
       //make the post request
-      http.Response res = await http.post(Uri.parse('$BACKEND_URL/api/signup'),
+      http.Response res = await http.post(Uri.parse('$backendURL/api/signup'),
           body: userModel.toJson(),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8'

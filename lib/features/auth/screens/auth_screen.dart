@@ -50,15 +50,16 @@ class _AuthScreenState extends State<AuthScreen> {
                         });
                       },
                       style: ElevatedButton.styleFrom(
-                        foregroundColor: _auth == Auth.signup
-                            ? GlobalVariables.secondaryColor
-                            : Colors.black,
+                        foregroundColor: Colors.black,
                         backgroundColor: _auth == Auth.signup
-                            ? Colors.black38
-                            : Colors.transparent,
+                            ? GlobalVariables.greyBackgroundCOlor
+                            : Colors.white,
                       ),
                       child: const Text("Sign Up"),
                     ),
+                  ),
+                  const SizedBox(
+                    width: 8,
                   ),
                   Expanded(
                     child: ElevatedButton(
@@ -68,12 +69,10 @@ class _AuthScreenState extends State<AuthScreen> {
                         });
                       },
                       style: ElevatedButton.styleFrom(
-                        foregroundColor: _auth == Auth.signin
-                            ? GlobalVariables.secondaryColor
-                            : Colors.black,
+                        foregroundColor: Colors.black,
                         backgroundColor: _auth == Auth.signin
-                            ? Colors.black38
-                            : Colors.transparent,
+                            ? GlobalVariables.greyBackgroundCOlor
+                            : Colors.white,
                       ),
                       child: const Text("Sign In"),
                     ),
@@ -82,42 +81,49 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
               if (_auth == Auth.signup)
                 Container(
+                  decoration: BoxDecoration(
+                    color: GlobalVariables.greyBackgroundCOlor,
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
                   padding: const EdgeInsets.all(8),
-                  color: GlobalVariables.greyBackgroundCOlor,
-                  child: Form(
-                    key: _signUpFormKey,
-                    child: Column(
-                      children: [
-                        CustomTextField(
-                          editingController: _nameController,
-                          hintText: "Full Name",
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        CustomTextField(
-                          editingController: _emailController,
-                          hintText: "E Mail",
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        CustomTextField(
-                          editingController: _passwordController,
-                          hintText: "Password",
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        CustomButton(
-                          text: "Sign Up",
-                          onPressed: () {
-                            if (_signUpFormKey.currentState!.validate()) {
-                              signUpUser();
-                            }
-                          },
-                        )
-                      ],
+                  //color: GlobalVariables.greyBackgroundCOlor,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Form(
+                      key: _signUpFormKey,
+                      child: Column(
+                        children: [
+                          CustomTextField(
+                            editingController: _nameController,
+                            hintText: "Full Name",
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          CustomTextField(
+                            editingController: _emailController,
+                            hintText: "E Mail",
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          CustomTextField(
+                            editingController: _passwordController,
+                            hintText: "Password",
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          CustomButton(
+                            text: "Sign Up",
+                            onPressed: () {
+                              if (_signUpFormKey.currentState!.validate()) {
+                                signUpUser();
+                              }
+                            },
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
