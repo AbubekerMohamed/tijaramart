@@ -95,4 +95,40 @@ class AuthService {
       );
     }
   }
+
+  void getUserData(BuildContext context) async {
+    try {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      String? token = sharedPreferences.getString('x-auth-token');
+      if (token == null) {
+        sharedPreferences.setString('x-auth-token', '');
+      }
+      http.Response res = await http.post(Uri.parse('$backendURL/tokenIsValid'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'x-auth-token': token!
+          });
+      bool response = jsonDecode(res.body);
+
+      if (response == true) {
+        // get user data
+        http.Response userResponse = await http.get(
+          Uri.parse('$backendURL/'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'x-auth-token': token,
+          },
+        );
+
+        var userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.setUser(userResponse.body);
+      }
+    } catch (error) {
+      showSnackBar(
+        context,
+        error.toString(),
+      );
+    }
+  }
 }

@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 
 // import from files
 const UserModel = require("../models/userModel");
+const authMiddleware = require("../middlewares/authMiddleware");
 
 const authRouter = express.Router();
 
@@ -79,6 +80,35 @@ authRouter.post("/api/signin", async (req, res) => {
       message: error.message,
     });
   }
+});
+
+// Sign up route
+authRouter.post("/tokenIsValid", async (req, res) => {
+  try {
+    const token = req.header("x-auth-token");
+    if (!token) return res.json(false);
+
+    const isValid = jwt.verify(token, "passwordKey");
+    if (!isValid) return res.json(false);
+
+    const user = await UserModel.findById(isValid.id);
+    if (!user) return res.json(false);
+
+    return res.json(true);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+});
+
+// get user data
+authRouter.get("/", authMiddleware, async (req, res) => {
+  const user = await UserModel.findById(req.user);
+  res.json({
+    ...user._doc,
+    token: req.token,
+  });
 });
 
 module.exports = authRouter;
