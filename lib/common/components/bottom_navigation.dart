@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tijaramart/constants/global_variables.dart';
+import 'package:tijaramart/features/account/screens/account_screen.dart';
 import 'package:tijaramart/features/home/screens/home_screen.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -21,7 +22,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       child: Text("Cart Page"),
     ),
     const Center(
-      child: Text("Account Page"),
+      child: AccountScreen(),
     ),
   ];
 
