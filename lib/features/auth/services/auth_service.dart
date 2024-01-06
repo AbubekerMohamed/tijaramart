@@ -84,8 +84,6 @@ class AuthService {
           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
           sharedPreferences.setString(
               "x-auth-token", jsonDecode(res.body)['token']);
-          Navigator.pushNamedAndRemoveUntil(
-              context, BottomNavigation.routeName, (route) => false);
         },
       );
     } catch (error) {

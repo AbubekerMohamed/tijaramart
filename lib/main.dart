@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tijaramart/common/components/bottom_navigation.dart';
 import 'package:tijaramart/constants/global_variables.dart';
+import 'package:tijaramart/features/admin/screens/admin_screen.dart';
 import 'package:tijaramart/features/auth/screens/auth_screen.dart';
 import 'package:tijaramart/features/auth/services/auth_service.dart';
-import 'package:tijaramart/features/home/screens/home_screen.dart';
 import 'package:tijaramart/providers/user_provider.dart';
 import 'package:tijaramart/routes.dart';
 
@@ -52,10 +52,12 @@ class _MyAppState extends State<MyApp> {
           iconTheme: IconThemeData(color: Colors.black),
         ),
       ),
-      home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? const BottomNavigation()
-          : const AuthScreen(),
       onGenerateRoute: (settings) => generateRoute(settings),
+      home: Provider.of<UserProvider>(context).user.token.isNotEmpty
+          ? Provider.of<UserProvider>(context).user.role == 'customer'
+              ? const BottomNavigation()
+              : const AdminScreen()
+          : const AuthScreen(),
     );
   }
 }

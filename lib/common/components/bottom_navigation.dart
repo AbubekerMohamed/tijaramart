@@ -13,8 +13,6 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> {
   int _page = 0;
-  double bottomBarWidth = 42;
-  double bottomBarBorderWidth = 5;
 
   List<Widget> pages = [
     const HomeScreen(),
@@ -25,6 +23,12 @@ class _BottomNavigationState extends State<BottomNavigation> {
       child: AccountScreen(),
     ),
   ];
+
+  void updatePageNumber(int page) {
+    setState(() {
+      _page = page;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,11 +84,5 @@ class _BottomNavigationState extends State<BottomNavigation> {
         ),
       ),
     );
-  }
-
-  void updatePageNumber(int page) {
-    setState(() {
-      _page = page;
-    });
   }
 }
