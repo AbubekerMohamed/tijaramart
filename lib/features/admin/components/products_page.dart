@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tijaramart/features/admin/screens/add_product_screen.dart';
 
 class ProductsPage extends StatefulWidget {
   const ProductsPage({super.key});
@@ -8,6 +9,10 @@ class ProductsPage extends StatefulWidget {
 }
 
 class _ProductsPageState extends State<ProductsPage> {
+  void navigateToAddProductScreen() {
+    Navigator.pushNamed(context, AddProductScreen.routeName);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +20,7 @@ class _ProductsPageState extends State<ProductsPage> {
         child: Text("Products"),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: navigateToAddProductScreen,
         tooltip: "Add product",
         child: const Icon(
           Icons.add_outlined,

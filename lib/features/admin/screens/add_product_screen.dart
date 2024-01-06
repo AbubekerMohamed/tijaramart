@@ -16,29 +16,17 @@ class _AddProductScreenState extends State<AddProductScreen> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(50),
           child: AppBar(
-            flexibleSpace: Container(
-              decoration: const BoxDecoration(
-                gradient: GlobalVariables.appBarGradient,
+              flexibleSpace: Container(
+                decoration: const BoxDecoration(
+                  gradient: GlobalVariables.appBarGradient,
+                ),
               ),
-            ),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: Image.asset(
-                    'assets/images/amazon_in.png',
-                    width: 120,
-                    height: 45,
-                    color: Colors.black,
-                  ),
+              title: const Center(
+                child: Text(
+                  "Add Product",
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                const CircleAvatar(
-                  foregroundImage: AssetImage("assets/images/img3.png"),
-                ),
-              ],
-            ),
-          ),
+              )),
         ),
         body: const Center(
           child: Text("Add Products"),
