@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tijaramart/constants/global_variables.dart';
 import 'package:tijaramart/features/home/components/address_box.dart';
 import 'package:tijaramart/features/home/components/category_box.dart';
+import 'package:tijaramart/features/home/components/daily_deal.dart';
 import 'package:tijaramart/features/home/components/product_banner.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -35,43 +36,45 @@ class _HomeScreenState extends State<HomeScreen> {
                     borderRadius: BorderRadius.circular(7),
                     elevation: 1,
                     child: TextFormField(
-                        decoration: InputDecoration(
-                            prefixIcon: InkWell(
-                              onTap: () {},
-                              child: const Padding(
-                                padding: EdgeInsets.only(left: 6),
-                                child: Icon(
-                                  Icons.search,
-                                  color: Colors.black,
-                                  size: 23,
-                                ),
-                              ),
+                      decoration: InputDecoration(
+                        prefixIcon: InkWell(
+                          onTap: () {},
+                          child: const Padding(
+                            padding: EdgeInsets.only(left: 6),
+                            child: Icon(
+                              Icons.search,
+                              color: Colors.black,
+                              size: 23,
                             ),
-                            filled: true,
-                            fillColor: Colors.white,
-                            contentPadding: const EdgeInsets.only(
-                              top: 10,
-                            ),
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(7),
-                              ),
-                              borderSide: BorderSide.none,
-                            ),
-                            enabledBorder: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(7),
-                              ),
-                              borderSide: BorderSide(
-                                color: Colors.black38,
-                                width: 1,
-                              ),
-                            ),
-                            hintText: "Search tijaramart...",
-                            hintStyle: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 17,
-                            ))),
+                          ),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        contentPadding: const EdgeInsets.only(
+                          top: 10,
+                        ),
+                        border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(7),
+                          ),
+                          borderSide: BorderSide.none,
+                        ),
+                        enabledBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(7),
+                          ),
+                          borderSide: BorderSide(
+                            color: Colors.black38,
+                            width: 1,
+                          ),
+                        ),
+                        hintText: "Search tijaramart...",
+                        hintStyle: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -90,15 +93,18 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: const Column(
-        children: [
-          AddressBox(),
-          SizedBox(
-            height: 10,
-          ),
-          CategoryBox(),
-          ProductBanner(),
-        ],
+      body: const SingleChildScrollView(
+        child: Column(
+          children: [
+            AddressBox(),
+            SizedBox(
+              height: 10,
+            ),
+            CategoryBox(),
+            ProductBanner(),
+            DailyDeal()
+          ],
+        ),
       ),
     );
   }
