@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:tijaramart/common/components/custom_button.dart';
 import 'package:tijaramart/common/components/custom_textfield.dart';
 import 'package:tijaramart/constants/global_variables.dart';
 
@@ -115,24 +116,47 @@ class _AddProductScreenState extends State<AddProductScreen> {
               const SizedBox(
                 height: 10.0,
               ),
-              SizedBox(
-                width: double.infinity,
-                child: DropdownButton(
-                    isExpanded: true,
-                    value: selectedCategory,
-                    icon: const Icon(Icons.arrow_circle_down),
-                    items: productCategories.map((String productItem) {
-                      return DropdownMenuItem(
-                        value: productItem,
-                        child: Text(productItem),
-                      );
-                    }).toList(),
-                    onChanged: (String? value) {
-                      setState(() {
-                        selectedCategory = value!;
-                      });
-                    }),
-              )
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Category:     ",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.0),
+                        color: Colors.purple.shade200,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: DropdownButton(
+                            isExpanded: true,
+                            value: selectedCategory,
+                            icon: const Icon(Icons.arrow_circle_down),
+                            items: productCategories.map((String productItem) {
+                              return DropdownMenuItem(
+                                value: productItem,
+                                child: Text(productItem),
+                              );
+                            }).toList(),
+                            onChanged: (String? value) {
+                              setState(() {
+                                selectedCategory = value!;
+                              });
+                            }),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              CustomButton(text: "Add", onPressed: () {})
             ],
           ),
         )),
