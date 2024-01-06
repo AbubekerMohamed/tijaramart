@@ -16,6 +16,7 @@ class _ProductsPageState extends State<ProductsPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
+        tooltip: "Add product",
         child: const Icon(
           Icons.add_outlined,
         ),

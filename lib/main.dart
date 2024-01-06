@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: const ColorScheme.light(
-          primary: GlobalVariables.secondaryColor,
+          primary: Color.fromARGB(255, 136, 0, 255),
         ),
         scaffoldBackgroundColor: GlobalVariables.backgroundColor,
         appBarTheme: const AppBarTheme(
