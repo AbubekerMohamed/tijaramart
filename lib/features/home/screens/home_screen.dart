@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tijaramart/constants/global_variables.dart';
 import 'package:tijaramart/features/home/components/address_box.dart';
 import 'package:tijaramart/features/home/components/category_box.dart';
+import 'package:tijaramart/features/home/components/product_banner.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
@@ -96,6 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 10,
           ),
           CategoryBox(),
+          ProductBanner(),
         ],
       ),
     );
