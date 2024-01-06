@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:tijaramart/constants/global_variables.dart';
-import 'package:tijaramart/providers/user_provider.dart';
+import 'package:tijaramart/features/home/components/address_box.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
@@ -14,8 +13,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    // get the user data
-    final user = Provider.of<UserProvider>(context).user;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -92,7 +89,12 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: const Column(
-        children: [],
+        children: [
+          AddressBox(),
+          SizedBox(
+            height: 10,
+          ),
+        ],
       ),
     );
   }
