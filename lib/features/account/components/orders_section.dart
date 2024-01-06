@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:tijaramart/constants/global_variables.dart';
 import 'package:tijaramart/features/account/components/product_item.dart';
