@@ -3,18 +3,29 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 
 // import from files
-const UserModel = require("../models/userModel");
 const adminMiddleware = require("../middlewares/adminMiddleware");
+const ProductModel = require("../models/productModel");
 
 const adminRouter = express.Router();
 
 // add product route
-adminRouter.post("/admin/add-product", admin, async (req, res){
+adminRouter.post("/admin/add-product", adminMiddleware, async (req, res) => {
   try {
-    const { name, description, price, quantity, category,images,} = req.body;
+    const { name, description, price, quantity, category, images } = req.body;
+    let product = new ProductModel({
+      name,
+      description,
+      price,
+      quantity,
+      category,
+      images,
+    });
+
+    product = await product.save();
+    res.json(product);
   } catch (error) {
-    res.status(500).json({error: error.message});
+    res.status(500).json({ error: error.message });
   }
 });
 
-module.exports = authRouter;
+module.exports = adminRouter;

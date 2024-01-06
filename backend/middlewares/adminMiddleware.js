@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/userModel");
 
-const authMiddleware = async (req, res, next) => {
+const adminMiddleware = async (req, res, next) => {
   try {
     const token = req.header("x-auth-token");
     if (!token)
@@ -30,4 +30,4 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = authMiddleware;
+module.exports = adminMiddleware;
