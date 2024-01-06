@@ -1,7 +1,11 @@
+import 'dart:io';
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:tijaramart/common/components/custom_button.dart';
 import 'package:tijaramart/common/components/custom_textfield.dart';
+import 'package:tijaramart/common/utils/utility_functions.dart';
 import 'package:tijaramart/constants/global_variables.dart';
 
 class AddProductScreen extends StatefulWidget {
@@ -20,6 +24,15 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   List<String> productCategories = ["Mobile", "Clothes", "Appliances", "Foods"];
   String selectedCategory = "Mobile";
+  List<File> images = [];
+
+  void selectImages() async {
+    var res = await pickImages();
+    setState(() {
+      images = res;
+    });
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -53,37 +66,57 @@ class _AddProductScreenState extends State<AddProductScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
           child: Column(
             children: [
-              DottedBorder(
-                borderType: BorderType.RRect,
-                radius: const Radius.circular(10.0),
-                dashPattern: const [10, 4],
-                strokeCap: StrokeCap.round,
-                child: Container(
-                  width: double.infinity,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.folder_open_outlined,
-                        size: 40.0,
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        "Upload Product Image",
-                        style: TextStyle(
-                          color: Colors.grey.shade400,
+              images.isEmpty
+                  ? GestureDetector(
+                      onTap: selectImages,
+                      child: DottedBorder(
+                        borderType: BorderType.RRect,
+                        radius: const Radius.circular(10.0),
+                        dashPattern: const [10, 4],
+                        strokeCap: StrokeCap.round,
+                        child: Container(
+                          width: double.infinity,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.folder_open_outlined,
+                                size: 40.0,
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                "Upload Product Image",
+                                style: TextStyle(
+                                  color: Colors.grey.shade400,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
+                    )
+                  : CarouselSlider(
+                      items: images.map((index) {
+                        return Builder(
+                          builder: (BuildContext context) => Image.file(
+                            index,
+                            fit: BoxFit.cover,
+                            height: 200,
+                          ),
+                        );
+                      }).toList(),
+                      options: CarouselOptions(
+                        // the image fills the screen
+                        viewportFraction: 1,
+                        height: 200,
+                      ),
+                    ),
               const SizedBox(
                 height: 20.0,
               ),
