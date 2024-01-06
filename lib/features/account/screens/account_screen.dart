@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tijaramart/constants/global_variables.dart';
 import 'package:tijaramart/features/account/components/greet_user.dart';
+import 'package:tijaramart/features/account/components/orders_section.dart';
 import 'package:tijaramart/features/account/components/top_chips.dart';
 
 class AccountScreen extends StatelessWidget {
@@ -55,6 +56,7 @@ class AccountScreen extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
+          OrdersSection(),
         ],
       ),
     );
