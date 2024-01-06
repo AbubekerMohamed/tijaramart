@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/material.dart';
 import 'package:tijaramart/common/components/snackbar.dart';
+import 'package:tijaramart/models/product_nodel.dart';
 
 class AdminService {
   void addProduct(
@@ -28,8 +29,17 @@ class AdminService {
         );
         imageUrls.add(response.secureUrl);
       }
+
+      ProductModel product = ProductModel(
+        name: name,
+        description: description,
+        quantity: quantity,
+        price: price,
+        category: category,
+        images: imageUrls,
+      );
     } catch (error) {
-      showSnackBar(context, error.toString());
+      if (context.mounted) showSnackBar(context, error.toString());
     }
   }
 }
