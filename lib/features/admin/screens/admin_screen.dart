@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:tijaramart/constants/global_variables.dart';
+import 'package:tijaramart/features/admin/components/products_page.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
@@ -13,9 +14,7 @@ class _AdminScreenState extends State<AdminScreen> {
   int _page = 0;
 
   List<Widget> pages = [
-    const Center(
-      child: Text("Products Page"),
-    ),
+    const ProductsPage(),
     const Center(
       child: Text("Analytics Page"),
     ),
