@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tijaramart/constants/global_variables.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:tijaramart/features/account/screens/account_screen.dart';
 import 'package:tijaramart/features/home/screens/home_screen.dart';
 
@@ -30,69 +30,48 @@ class _BottomNavigationState extends State<BottomNavigation> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(child: pages[_page]),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _page,
-        onTap: updatePageNumber,
-        selectedItemColor: GlobalVariables.selectedNavBarColor,
-        unselectedItemColor: GlobalVariables.unselectedNavBarColor,
-        backgroundColor: GlobalVariables.backgroundColor,
-        iconSize: 28,
-        items: [
-          BottomNavigationBarItem(
-            icon: Container(
-              width: bottomBarWidth,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: _page == 0
-                        ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.backgroundColor,
-                    width: bottomBarBorderWidth,
+      bottomNavigationBar: Container(
+        color: Colors.purple[200],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 15.0,
+            vertical: 10.0,
+          ),
+          child: GNav(
+            iconSize: 28,
+            backgroundColor: Colors.purple[200]!,
+            color: Colors.black87,
+            activeColor: Colors.white,
+            tabBackgroundColor: Colors.deepPurple,
+            padding: const EdgeInsets.all(16),
+            gap: 5,
+            onTabChange: (index) {
+              updatePageNumber(index);
+            },
+            tabs: [
+              const GButton(
+                icon: Icons.home,
+                text: "Home",
+              ),
+              GButton(
+                icon: Icons.shopping_cart,
+                text: "Cart",
+                leading: Badge(
+                  label: const Text("1"),
+                  offset: const Offset(12, -12),
+                  child: Icon(
+                    Icons.shopping_cart,
+                    color: _page == 1 ? Colors.white : Colors.black,
                   ),
                 ),
               ),
-              child: const Icon(Icons.home_outlined),
-            ),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Container(
-              width: bottomBarWidth,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: _page == 1
-                        ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.backgroundColor,
-                    width: bottomBarBorderWidth,
-                  ),
-                ),
+              const GButton(
+                icon: Icons.person,
+                text: "Profile",
               ),
-              child: const Badge(
-                label: Text('1'),
-                child: Icon(Icons.shopping_cart_outlined),
-              ),
-            ),
-            label: "Cart",
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Container(
-              width: bottomBarWidth,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: _page == 2
-                        ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.backgroundColor,
-                    width: bottomBarBorderWidth,
-                  ),
-                ),
-              ),
-              child: const Icon(Icons.person_outlined),
-            ),
-            label: "Profile",
-          ),
-        ],
+        ),
       ),
     );
   }

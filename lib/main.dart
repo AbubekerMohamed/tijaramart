@@ -40,15 +40,18 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'tijaramart',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          colorScheme: const ColorScheme.light(
-            primary: GlobalVariables.secondaryColor,
-          ),
-          scaffoldBackgroundColor: GlobalVariables.backgroundColor,
-          appBarTheme: const AppBarTheme(
-              elevation: 0, iconTheme: IconThemeData(color: Colors.black))),
+        colorScheme: const ColorScheme.light(
+          primary: GlobalVariables.secondaryColor,
+        ),
+        scaffoldBackgroundColor: GlobalVariables.backgroundColor,
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          iconTheme: IconThemeData(color: Colors.black),
+        ),
+      ),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
           ? const BottomNavigation()
           : const AuthScreen(),
