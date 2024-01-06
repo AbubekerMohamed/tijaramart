@@ -19,11 +19,14 @@ class CategoryBox extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10,
                 ),
-                child: Image.asset(
-                  GlobalVariables.categoryImages[index]['image']!,
-                  fit: BoxFit.cover,
-                  height: 40,
-                  width: 40,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(50),
+                  child: Image.asset(
+                    GlobalVariables.categoryImages[index]['image']!,
+                    fit: BoxFit.cover,
+                    height: 40,
+                    width: 40,
+                  ),
                 ),
               ),
               Text(
