@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tijaramart/constants/global_variables.dart';
 import 'package:tijaramart/features/account/components/greet_user.dart';
+import 'package:tijaramart/features/account/components/top_chips.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
@@ -44,9 +45,16 @@ class AccountScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        children: const [
+      body: const Column(
+        children: [
           GreetUser(),
+          SizedBox(
+            height: 10,
+          ),
+          TopChips(),
+          SizedBox(
+            height: 20,
+          ),
         ],
       ),
     );
