@@ -3,7 +3,6 @@ import 'dart:convert';
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class ProductModel {
   String? id;
-  String? userId;
   final String name;
   final String description;
   final double quantity;
@@ -12,7 +11,6 @@ class ProductModel {
   final List<String> images;
   ProductModel({
     this.id,
-    this.userId,
     required this.name,
     required this.description,
     required this.quantity,
@@ -24,7 +22,6 @@ class ProductModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'userId': userId,
       'name': name,
       'description': description,
       'quantity': quantity,
@@ -37,7 +34,6 @@ class ProductModel {
   factory ProductModel.fromMap(Map<String, dynamic> map) {
     return ProductModel(
       id: map['_id'] != null ? map['id'] as String : null,
-      userId: map['userId'] != null ? map['userId'] as String : null,
       name: map['name'] as String,
       description: map['description'] as String,
       quantity: map['quantity'] as double,
