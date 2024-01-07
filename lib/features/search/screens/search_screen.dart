@@ -56,6 +56,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     elevation: 1,
                     child: TextFormField(
                       onFieldSubmitted: (value) {},
+                      initialValue: widget.searchQuery,
                       decoration: InputDecoration(
                         prefixIcon: InkWell(
                           onTap: () {},
