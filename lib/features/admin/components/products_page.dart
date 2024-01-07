@@ -25,6 +25,17 @@ class _ProductsPageState extends State<ProductsPage> {
     setState(() {});
   }
 
+  void deleteProduct(ProductModel product, int index) {
+    adminService.deleteProduct(
+      context: context,
+      product: product,
+      onSuccess: () {
+        productList!.removeAt(index);
+        setState(() {});
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -67,7 +78,7 @@ class _ProductsPageState extends State<ProductsPage> {
                             ),
                             IconButton(
                               icon: const Icon(Icons.delete_outline),
-                              onPressed: () {},
+                              onPressed: () => deleteProduct(product, index),
                             )
                           ],
                         )

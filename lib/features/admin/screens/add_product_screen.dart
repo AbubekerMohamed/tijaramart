@@ -40,13 +40,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
   void addProduct() {
     if (_addProductFormKey.currentState!.validate() && images.isNotEmpty) {
       adminService.addProduct(
-          context: context,
-          name: _productNameController.text,
-          description: _productDescriptionController.text,
-          price: double.parse(_productPriceController.text),
-          quantity: double.parse(_productQuantityController.text),
-          category: selectedCategory,
-          images: images);
+        context: context,
+        name: _productNameController.text,
+        description: _productDescriptionController.text,
+        price: double.parse(_productPriceController.text),
+        quantity: double.parse(_productQuantityController.text),
+        category: selectedCategory,
+        images: images,
+      );
     }
   }
 
