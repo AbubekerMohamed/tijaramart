@@ -6,6 +6,7 @@ const cors = require("cors");
 // imports from files
 const authRouter = require("./routes/authRouter");
 const adminRouter = require("./routes/adminRouter");
+const productRouter = require("./routes/productRouter");
 // instances
 const PORT = 3000;
 const DB_URL =
@@ -17,6 +18,8 @@ app.use(cors());
 app.use(express.json()); // for serialization
 app.use(authRouter);
 app.use(adminRouter);
+app.use(productRouter);
+
 // establish connections
 mongoose
   .connect(DB_URL)

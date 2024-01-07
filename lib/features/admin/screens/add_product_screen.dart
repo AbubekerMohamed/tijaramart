@@ -25,8 +25,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   final AdminService adminService = AdminService();
 
-  List<String> productCategories = ["Mobile", "Clothes", "Appliances", "Foods"];
-  String selectedCategory = "Mobile";
+  List<String> productCategories = [
+    "Mobiles",
+    "Clothes",
+    "Appliances",
+    "Fashions"
+  ];
+  String selectedCategory = "Mobiles";
   List<File> images = [];
   final _addProductFormKey = GlobalKey<FormState>();
 

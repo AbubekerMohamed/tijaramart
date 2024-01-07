@@ -47,7 +47,7 @@ class GlobalVariables {
       'image': 'assets/images/books.jpeg',
     },
     {
-      'title': 'Fashion',
+      'title': 'Fashions',
       'image': 'assets/images/fashion.jpeg',
     },
   ];
