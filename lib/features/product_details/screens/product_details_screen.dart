@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:tijaramart/common/components/rating_stars.dart';
 import 'package:tijaramart/constants/global_variables.dart';
@@ -98,15 +99,88 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  widget.product.id!,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    widget.product.id!,
+                  ),
+                  const RatingStars(rating: 4)
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 20,
+                horizontal: 10,
+              ),
+              child: Text(
+                widget.product.name,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700,
                 ),
-                const RatingStars(rating: 4)
-              ],
+              ),
+            ),
+            CarouselSlider(
+              items: widget.product.images.map((index) {
+                return Builder(
+                  builder: (BuildContext context) => Image.network(
+                    index,
+                    fit: BoxFit.cover,
+                    height: 300,
+                  ),
+                );
+              }).toList(),
+              options: CarouselOptions(
+                // the image fills the screen
+                viewportFraction: 1,
+                height: 200,
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.purple.shade200,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(
+                        8.0,
+                      ),
+                      child: RichText(
+                        text: TextSpan(
+                            text: "Price: ",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: '\$${widget.product.price}',
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  color: Colors.purple.shade900,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ]),
+                      ),
+                    ),
+                    Text(widget.product.description)
+                  ],
+                ),
+              ),
             )
           ],
         ),
