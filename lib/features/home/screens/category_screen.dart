@@ -101,12 +101,28 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                 child: Image.network(product.images[0]),
                               ),
                             ),
+                          ),
+                          Container(
+                            alignment: Alignment.topLeft,
+                            padding: const EdgeInsets.only(
+                              left: 0,
+                              top: 5,
+                              right: 15,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 5.0),
+                              child: Text(
+                                product.name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
                           )
                         ],
                       );
                     },
                   ),
-                )
+                ),
               ],
             ),
     );
