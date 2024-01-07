@@ -4,6 +4,7 @@ import 'package:tijaramart/features/admin/screens/add_product_screen.dart';
 import 'package:tijaramart/features/auth/screens/auth_screen.dart';
 import 'package:tijaramart/features/home/screens/category_screen.dart';
 import 'package:tijaramart/features/home/screens/home_screen.dart';
+import 'package:tijaramart/features/search/screens/search_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
@@ -34,6 +35,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const AddProductScreen(),
+      );
+    case SearchScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const SearchScreen(),
       );
     default:
       return MaterialPageRoute(
