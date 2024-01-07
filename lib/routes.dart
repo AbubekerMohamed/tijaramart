@@ -4,7 +4,9 @@ import 'package:tijaramart/features/admin/screens/add_product_screen.dart';
 import 'package:tijaramart/features/auth/screens/auth_screen.dart';
 import 'package:tijaramart/features/home/screens/category_screen.dart';
 import 'package:tijaramart/features/home/screens/home_screen.dart';
+import 'package:tijaramart/features/product_details/screens/product_details_screen.dart';
 import 'package:tijaramart/features/search/screens/search_screen.dart';
+import 'package:tijaramart/models/product_nodel.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
@@ -42,6 +44,14 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => SearchScreen(
           searchQuery: searchQuery,
+        ),
+      );
+    case ProductDetailsScreen.routeName:
+      var product = routeSettings.arguments as ProductModel;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => ProductDetailsScreen(
+          product: product,
         ),
       );
     default:
