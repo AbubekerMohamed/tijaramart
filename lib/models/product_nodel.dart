@@ -33,15 +33,14 @@ class ProductModel {
 
   factory ProductModel.fromMap(Map<String, dynamic> map) {
     return ProductModel(
-      id: map['_id'] != null ? map['id'] as String : null,
-      name: map['name'] as String,
-      description: map['description'] as String,
-      quantity: map['quantity'] as double,
-      price: map['price'] as double,
-      category: map['category'] as String,
-      images: List<String>.from(
-        (map['images'] as List<String>),
-      ),
+      name: map['name'] ?? '',
+      description: map['description'] ?? '',
+      quantity: map['quantity']?.toDouble() ?? 0.0,
+      images: List<String>.from(map['images']),
+      category: map['category'] ?? '',
+      price: map['price']?.toDouble() ?? 0.0,
+      id: map['_id'],
+      //rating will be added
     );
   }
 

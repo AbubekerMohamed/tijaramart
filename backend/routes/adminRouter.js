@@ -29,7 +29,7 @@ adminRouter.post("/admin/add-product", adminMiddleware, async (req, res) => {
 });
 
 // add product route
-adminRouter.post("/admin/get-products", adminMiddleware, async (req, res) => {
+adminRouter.get("/admin/get-products", adminMiddleware, async (req, res) => {
   try {
     const products = await ProductModel.find({});
     res.json(products);
