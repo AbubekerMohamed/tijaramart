@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tijaramart/common/components/bottom_navigation.dart';
 import 'package:tijaramart/features/admin/screens/add_product_screen.dart';
 import 'package:tijaramart/features/auth/screens/auth_screen.dart';
+import 'package:tijaramart/features/home/screens/category_screen.dart';
 import 'package:tijaramart/features/home/screens/home_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
@@ -20,6 +21,14 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const HomeScreen(),
+      );
+    case CategoryScreen.routeName:
+      var category = routeSettings.arguments as String;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => CategoryScreen(
+          categoryTitle: category,
+        ),
       );
     case AddProductScreen.routeName:
       return MaterialPageRoute(
