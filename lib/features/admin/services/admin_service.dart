@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cloudinary_public/cloudinary_public.dart';
@@ -11,6 +12,7 @@ import 'package:tijaramart/models/product_nodel.dart';
 import 'package:tijaramart/providers/user_provider.dart';
 
 class AdminService {
+  // bounded to add product backend
   void addProduct(
       {required BuildContext context,
       required String name,
@@ -49,7 +51,10 @@ class AdminService {
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': context.mounted
-              ? Provider.of<UserProvider>(context).user.token
+              ? Provider.of<UserProvider>(
+                  context,
+                  listen: false,
+                ).user.token
               : '',
         },
         body: product.toJson(),
@@ -67,5 +72,35 @@ class AdminService {
     } catch (error) {
       if (context.mounted) showSnackBar(context, error.toString());
     }
+  }
+
+  // bounded to get products
+  Future<List<ProductModel>> getAllProducts(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    List<ProductModel> productList = [];
+    try {
+      http.Response response = await http.get(
+        Uri.parse("$backendURL/admin/get-products"),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+      );
+      if (context.mounted) {
+        httpErrorHandle(
+          response: response,
+          context: context,
+          onSuccess: () {
+            for (int i = 0; i < jsonEncode(response.body).length; i++) {
+              productList
+                  .add(ProductModel.fromJson(jsonEncode(response.body)[i]));
+            }
+          },
+        );
+      }
+    } catch (error) {
+      if (context.mounted) showSnackBar(context, error.toString());
+    }
+    return productList;
   }
 }
