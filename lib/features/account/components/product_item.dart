@@ -21,7 +21,7 @@ class ProductItem extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Image.network(
             imageUrl,
-            fit: BoxFit.cover,
+            fit: BoxFit.fitHeight,
             width: 180,
           ),
         ),

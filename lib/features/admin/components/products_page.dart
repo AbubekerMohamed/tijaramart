@@ -36,9 +36,45 @@ class _ProductsPageState extends State<ProductsPage> {
     return productList == null
         ? const Loader()
         : Scaffold(
-            body: Center(
-              child: Text(productList.toString()),
-            ),
+            body: GridView.builder(
+                itemCount: productList!.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                itemBuilder: (context, index) {
+                  var product = productList![index];
+                  return Padding(
+                    padding: const EdgeInsets.only(
+                      top: 10,
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 140,
+                          child: ProductItem(
+                            imageUrl: product.images[0],
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 15.0),
+                                child: Text(
+                                  product.name,
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.delete_outline),
+                              onPressed: () {},
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  );
+                }),
             floatingActionButton: FloatingActionButton(
               onPressed: navigateToAddProductScreen,
               tooltip: "Add product",
