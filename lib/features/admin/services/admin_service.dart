@@ -86,29 +86,23 @@ class AdminService {
           'x-auth-token': userProvider.user.token,
         },
       );
-      print(jsonDecode(response.body));
-      productList.add(
-        ProductModel.fromJson(
-          jsonEncode(
-            jsonDecode(response.body)[0],
-          ),
-        ),
-      );
-      // httpErrorHandle(
-      //   response: response,
-      //   context: context,
-      //   onSuccess: () {
-      //     for (int i = 0; i < jsonDecode(response.body).length; i++) {
-      //       productList.add(
-      //         ProductModel.fromJson(
-      //           jsonEncode(
-      //             jsonDecode(response.body)[i],
-      //           ),
-      //         ),
-      //       );
-      //     }
-      //   },
-      // );
+      if (context.mounted) {
+        httpErrorHandle(
+          response: response,
+          context: context,
+          onSuccess: () {
+            for (int i = 0; i < jsonDecode(response.body).length; i++) {
+              productList.add(
+                ProductModel.fromJson(
+                  jsonEncode(
+                    jsonDecode(response.body)[i],
+                  ),
+                ),
+              );
+            }
+          },
+        );
+      }
     } catch (error) {
       if (context.mounted) {
         showSnackBar(context, "Error from response ${error.toString()}");
