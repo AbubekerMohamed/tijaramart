@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // slim pc ip 192.168.43.29
 // work pc ip 172.20.102.21
-const String backendURL = "http://192.168.43.29:3000";
+const String backendURL = "http://172.28.240.1:3000";
 
 class GlobalVariables {
   // COLORS
