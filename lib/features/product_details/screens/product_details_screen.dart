@@ -18,7 +18,8 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  GlobalKey<FormState> _productDetailsScreenSearchKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _productDetailsScreenSearchKey =
+      GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {

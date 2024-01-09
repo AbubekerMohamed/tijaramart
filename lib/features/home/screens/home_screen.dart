@@ -15,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  GlobalKey<FormState> _homeScreenSearchKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _homeScreenSearchKey = GlobalKey<FormState>();
 
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);

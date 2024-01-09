@@ -33,7 +33,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   ];
   String selectedCategory = "Mobiles";
   List<File> images = [];
-  GlobalKey<FormState> _addProductFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _addProductFormKey = GlobalKey<FormState>();
 
   void selectImages() async {
     var res = await pickImages();

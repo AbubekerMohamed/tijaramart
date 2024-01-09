@@ -19,7 +19,7 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   List<ProductModel>? products;
   final SearchService searchService = SearchService();
-  GlobalKey<FormState> _searchScreenSearchKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _searchScreenSearchKey = GlobalKey<FormState>();
 
   @override
   void initState() {
