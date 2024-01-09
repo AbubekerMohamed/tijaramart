@@ -1,11 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:tijaramart/common/components/custom_button.dart';
 import 'package:tijaramart/common/components/rating_stars.dart';
 import 'package:tijaramart/constants/global_variables.dart';
 import 'package:tijaramart/models/product_nodel.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   static const String routeName = '/product-details-screen';
+
   final ProductModel product;
 
   const ProductDetailsScreen({super.key, required this.product});
@@ -15,6 +18,8 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  GlobalKey<FormState> _productDetailsScreenSearchKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +42,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     borderRadius: BorderRadius.circular(7),
                     elevation: 1,
                     child: TextFormField(
+                      key: _productDetailsScreenSearchKey,
                       onFieldSubmitted: (value) {},
                       initialValue:
                           "Search tijaramart...", //later add product name if it comes from search
@@ -131,7 +137,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 return Builder(
                   builder: (BuildContext context) => Image.network(
                     index,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                     height: 300,
                   ),
                 );
@@ -145,7 +151,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.purple.shade200,
+                color: Colors.purple.shade200.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Padding(
@@ -154,9 +160,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(
-                        8.0,
-                      ),
+                      padding: const EdgeInsets.all(8.0),
                       child: RichText(
                         text: TextSpan(
                             text: "Price: ",
@@ -177,7 +181,71 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             ]),
                       ),
                     ),
-                    Text(widget.product.description)
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: 15.0,
+                        top: 5.0,
+                        left: 8.0,
+                        right: 8.0,
+                      ),
+                      child: Text(widget.product.description),
+                    ),
+                    Container(
+                      height: 1,
+                      color: Colors.black12,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: CustomButton(text: "Buy Now", onPressed: () {}),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: CustomButton(
+                        text: "Add to Cart",
+                        onPressed: () {},
+                        color: Colors.purple.shade900,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      height: 3,
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      color: Colors.black12,
+                    ),
+                    const Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          "Rate This Product",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: RatingBar.builder(
+                        initialRating: 0,
+                        glowColor: Colors.orangeAccent.shade200,
+                        minRating: 1,
+                        direction: Axis.horizontal,
+                        allowHalfRating: true,
+                        itemCount: 5,
+                        itemPadding:
+                            const EdgeInsets.symmetric(horizontal: 4.0),
+                        itemBuilder: (context, _) {
+                          return Icon(
+                            Icons.star,
+                            color: Colors.orangeAccent.shade200,
+                          );
+                        },
+                        onRatingUpdate: (rating) {},
+                      ),
+                    ),
                   ],
                 ),
               ),

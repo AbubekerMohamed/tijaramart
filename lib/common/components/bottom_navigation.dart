@@ -33,8 +33,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: Stack(
+      body: Stack(
         children: [
           pages[_page],
           Align(
@@ -92,7 +91,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
             ),
           ),
         ],
-      )),
+      ),
     );
   }
 }

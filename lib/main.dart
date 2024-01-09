@@ -39,6 +39,7 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    GlobalKey<FormState> _homeKey = GlobalKey<FormState>(debugLabel: '_appkey');
     return MaterialApp(
       title: 'tijaramart',
       debugShowCheckedModeBanner: false,
@@ -51,13 +52,17 @@ class _MyAppState extends State<MyApp> {
           elevation: 0,
           iconTheme: IconThemeData(color: Colors.black),
         ),
+        fontFamily: 'Poppins',
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? Provider.of<UserProvider>(context).user.role == 'customer'
-              ? const BottomNavigation()
-              : const AdminScreen()
-          : const AuthScreen(),
+      home: Container(
+        key: _homeKey,
+        child: Provider.of<UserProvider>(context).user.token.isNotEmpty
+            ? Provider.of<UserProvider>(context).user.role == 'customer'
+                ? const BottomNavigation()
+                : const AdminScreen()
+            : const AuthScreen(),
+      ),
     );
   }
 }

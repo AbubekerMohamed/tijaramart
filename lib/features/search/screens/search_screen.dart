@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:tijaramart/common/components/loader.dart';
 import 'package:tijaramart/constants/global_variables.dart';
 import 'package:tijaramart/features/home/components/address_box.dart';
+import 'package:tijaramart/features/product_details/screens/product_details_screen.dart';
 import 'package:tijaramart/features/search/components/searched_product.dart';
 import 'package:tijaramart/features/search/services/search_service.dart';
 import 'package:tijaramart/models/product_nodel.dart';
 
 class SearchScreen extends StatefulWidget {
-  static const String routeName = "search-screen";
+  static const String routeName = "/search-screen";
   final String searchQuery;
   const SearchScreen({super.key, required this.searchQuery});
 
@@ -18,6 +19,7 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   List<ProductModel>? products;
   final SearchService searchService = SearchService();
+  GlobalKey<FormState> _searchScreenSearchKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -52,6 +54,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   height: 42,
                   margin: const EdgeInsets.only(left: 15),
                   child: Material(
+                    key: _searchScreenSearchKey,
                     borderRadius: BorderRadius.circular(7),
                     elevation: 1,
                     child: TextFormField(
@@ -126,7 +129,14 @@ class _SearchScreenState extends State<SearchScreen> {
                   child: ListView.builder(
                     itemCount: products!.length,
                     itemBuilder: (context, index) {
-                      return SearchedProduct(product: products![index]);
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, ProductDetailsScreen.routeName,
+                              arguments: products![index]);
+                        },
+                        child: SearchedProduct(product: products![index]),
+                      );
                     },
                   ),
                 )
