@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:tijaramart/models/rating_model.dart';
+
 class ProductModel {
   String? id;
   final String name;
@@ -9,6 +10,8 @@ class ProductModel {
   final double price;
   final String category;
   final List<String> images;
+  final List<RatingModel>? rating;
+
   ProductModel({
     this.id,
     required this.name,
@@ -17,6 +20,7 @@ class ProductModel {
     required this.price,
     required this.category,
     required this.images,
+    this.rating,
   });
 
   Map<String, dynamic> toMap() {
@@ -28,6 +32,7 @@ class ProductModel {
       'price': price,
       'category': category,
       'images': images,
+      'rating': rating,
     };
   }
 
@@ -40,7 +45,13 @@ class ProductModel {
       category: map['category'] ?? '',
       price: map['price']?.toDouble() ?? 0.0,
       id: map['_id'],
-      //rating will be added
+      rating: map['rating'] != null
+          ? List<RatingModel>.from(
+              map['rating']?.map(
+                (x) => RatingModel.fromMap(x),
+              ),
+            )
+          : null,
     );
   }
 
