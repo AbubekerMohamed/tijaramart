@@ -57,7 +57,7 @@ productRouter.post("/api/rate-product", auth, async (req, res) => {
   }
 });
 
-productRouter.post("/api/deal-of-the-day", auth, async (req, res) => {
+productRouter.get("/api/deal-of-the-day", auth, async (req, res) => {
   try {
     let products = await ProductModel.find({});
     products.sort((productA, productB) => {

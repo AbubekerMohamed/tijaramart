@@ -50,4 +50,41 @@ class HomeService {
     }
     return productList;
   }
+
+  // get daily  products in categories
+  Future<ProductModel> getDailyDeal({
+    required BuildContext context,
+  }) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    ProductModel topProduct = ProductModel(
+        name: '',
+        description: '',
+        quantity: 0,
+        price: 0,
+        category: '',
+        images: []);
+    try {
+      http.Response response = await http.get(
+        Uri.parse('$backendURL/api/deal-of-the-day'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+      );
+      if (context.mounted) {
+        httpErrorHandle(
+          response: response,
+          context: context,
+          onSuccess: () {
+            topProduct = ProductModel.fromJson(response.body);
+          },
+        );
+      }
+    } catch (error) {
+      if (context.mounted) {
+        showSnackBar(context, "Error from response ${error.toString()}");
+      }
+    }
+    return topProduct;
+  }
 }
