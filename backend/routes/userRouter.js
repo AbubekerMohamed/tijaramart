@@ -9,7 +9,7 @@ const UserModel = require("../models/userModel");
 const userRouter = express.Router();
 
 // add product to cart
-userRouter.post("/api/add-to-cart", adminMiddleware, async (req, res) => {
+userRouter.post("/api/add-to-cart", auth, async (req, res) => {
   try {
     const { id } = req.body;
     const product = await ProductModel.findById(id);

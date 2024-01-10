@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:provider/provider.dart';
 import 'package:tijaramart/features/account/screens/account_screen.dart';
 import 'package:tijaramart/features/home/screens/home_screen.dart';
+import 'package:tijaramart/providers/user_provider.dart';
 
 class BottomNavigation extends StatefulWidget {
   static const String routeName = '/actual-home';
@@ -32,6 +34,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   @override
   Widget build(BuildContext context) {
+    final userCartCount = context.watch<UserProvider>().user.cart.length;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -71,7 +75,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                           icon: Icons.shopping_cart,
                           text: "Cart",
                           leading: Badge(
-                            label: const Text("1"),
+                            label: Text(userCartCount.toString()),
                             offset: const Offset(12, -12),
                             child: Icon(
                               Icons.shopping_cart,
