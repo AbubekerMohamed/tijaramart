@@ -3,11 +3,11 @@ const express = require("express");
 
 // import from files
 const auth = require("../middlewares/authMiddleware");
-const ProductModel = require("../models/productModel");
+const { ProductModel } = require("../models/productModel");
 
 const productRouter = express.Router();
 
-// add product route
+// get products by category
 productRouter.get("/api/products-in-category", auth, async (req, res) => {
   try {
     const category = req.query["category"];
