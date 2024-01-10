@@ -21,13 +21,15 @@ class AuthService {
     try {
       // prepare the object to send to server
       UserModel userModel = UserModel(
-          id: "",
-          name: name,
-          email: email,
-          password: password,
-          address: "",
-          role: "",
-          token: "");
+        id: "",
+        name: name,
+        email: email,
+        password: password,
+        address: "",
+        role: "",
+        token: "",
+        cart: [],
+      );
       //make the post request
       http.Response res = await http.post(Uri.parse('$backendURL/api/signup'),
           body: userModel.toJson(),
