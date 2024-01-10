@@ -25,7 +25,7 @@ class ProductDetailsService {
         },
         body: jsonEncode(
           {
-            'id': product.id!,
+            'id': product.id,
             'rating': rating,
           },
         ),
