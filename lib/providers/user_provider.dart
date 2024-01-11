@@ -3,7 +3,7 @@ import 'package:tijaramart/models/user_model.dart';
 
 class UserProvider extends ChangeNotifier {
   UserModel _user = UserModel(
-    id: "",
+    id: '',
     name: '',
     email: '',
     password: '',

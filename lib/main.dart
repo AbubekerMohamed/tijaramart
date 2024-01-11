@@ -29,7 +29,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  AuthService authService = AuthService();
+  final AuthService authService = AuthService();
   @override
   void initState() {
     super.initState();
@@ -39,7 +39,6 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    GlobalKey<FormState> homeKey = GlobalKey<FormState>(debugLabel: '_appkey');
     return MaterialApp(
       title: 'tijaramart',
       debugShowCheckedModeBanner: false,
@@ -55,14 +54,11 @@ class _MyAppState extends State<MyApp> {
         fontFamily: 'Poppins',
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: Container(
-        key: homeKey,
-        child: Provider.of<UserProvider>(context).user.token.isNotEmpty
-            ? Provider.of<UserProvider>(context).user.role == 'customer'
-                ? const BottomNavigation()
-                : const AdminScreen()
-            : const AuthScreen(),
-      ),
+      home: Provider.of<UserProvider>(context).user.token.isNotEmpty
+          ? Provider.of<UserProvider>(context).user.role == 'customer'
+              ? const BottomNavigation()
+              : const AdminScreen()
+          : const AuthScreen(),
     );
   }
 }

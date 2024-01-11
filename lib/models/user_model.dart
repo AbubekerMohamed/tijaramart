@@ -62,7 +62,7 @@ class UserModel {
     String? email,
     String? password,
     String? address,
-    String? type,
+    String? role,
     String? token,
     List<dynamic>? cart,
   }) {
@@ -72,7 +72,7 @@ class UserModel {
       email: email ?? this.email,
       password: password ?? this.password,
       address: address ?? this.address,
-      role: type ?? this.role,
+      role: role ?? this.role,
       token: token ?? this.token,
       cart: cart ?? this.cart,
     );
