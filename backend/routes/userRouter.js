@@ -35,7 +35,7 @@ userRouter.post("/api/add-to-cart", auth, async (req, res) => {
     }
 
     user = await user.save();
-    res.json(product);
+    res.json(user);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -58,7 +58,7 @@ userRouter.delete("/api/remove-from-cart/:id", auth, async (req, res) => {
       }
     }
     user = await user.save();
-    res.json(product);
+    res.json(user);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
