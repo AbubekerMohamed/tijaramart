@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:tijaramart/features/account/screens/account_screen.dart';
+import 'package:tijaramart/features/cart/screens/cart_screen.dart';
 import 'package:tijaramart/features/home/screens/home_screen.dart';
 import 'package:tijaramart/providers/user_provider.dart';
 
@@ -18,9 +19,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   List<Widget> pages = [
     const HomeScreen(),
-    const Center(
-      child: Text("Cart Page"),
-    ),
+    const CartScreen(),
     const Center(
       child: AccountScreen(),
     ),
