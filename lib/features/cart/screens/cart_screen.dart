@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tijaramart/common/components/custom_button.dart';
 import 'package:tijaramart/constants/global_variables.dart';
+import 'package:tijaramart/features/address/screens/address_screen.dart';
 import 'package:tijaramart/features/cart/components/cart_product.dart';
 import 'package:tijaramart/features/cart/components/cart_subtotal.dart';
 import 'package:tijaramart/features/home/components/address_box.dart';
@@ -19,6 +20,10 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+  }
+
+  void navigateToAddressScreen() {
+    Navigator.pushNamed(context, AddressScreen.routeName);
   }
 
   @override
@@ -112,7 +117,9 @@ class _CartScreenState extends State<CartScreen> {
               padding: const EdgeInsets.all(8.0),
               child: CustomButton(
                 text: "Proceed to Checkout (${user.cart.length}) Items",
-                onPressed: () {},
+                onPressed: () {
+                  navigateToAddressScreen();
+                },
                 color: Colors.purple,
               ),
             ),
