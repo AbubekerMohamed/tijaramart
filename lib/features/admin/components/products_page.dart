@@ -50,7 +50,8 @@ class _ProductsPageState extends State<ProductsPage> {
             body: GridView.builder(
                 itemCount: productList!.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
+                  crossAxisCount: 2,
+                ),
                 itemBuilder: (context, index) {
                   var product = productList![index];
                   return Padding(
@@ -60,7 +61,7 @@ class _ProductsPageState extends State<ProductsPage> {
                     child: Column(
                       children: [
                         SizedBox(
-                          height: 140,
+                          height: 120,
                           child: ProductItem(
                             imageUrl: product.images[0],
                           ),

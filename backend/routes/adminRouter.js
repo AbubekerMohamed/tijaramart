@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 // import from files
 const adminMiddleware = require("../middlewares/adminMiddleware");
 const { ProductModel } = require("../models/productModel");
+const { OrderModel } = require("../models/orderModel");
 
 const adminRouter = express.Router();
 
@@ -44,6 +45,16 @@ adminRouter.post("/admin/delete-product", adminMiddleware, async (req, res) => {
     const { id } = req.body;
     let updatedProducts = await ProductModel.findByIdAndDelete(id);
     res.json(updatedProducts);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// add product route
+adminRouter.get("/admin/get-orders", adminMiddleware, async (req, res) => {
+  try {
+    const orders = await OrderModel.find({});
+    res.json(orders);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

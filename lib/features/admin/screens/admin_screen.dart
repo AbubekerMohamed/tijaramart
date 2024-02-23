@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:tijaramart/constants/global_variables.dart';
+import 'package:tijaramart/features/admin/components/orders_page.dart';
 import 'package:tijaramart/features/admin/components/products_page.dart';
 
 class AdminScreen extends StatefulWidget {
@@ -18,9 +19,7 @@ class _AdminScreenState extends State<AdminScreen> {
     const Center(
       child: Text("Analytics Page"),
     ),
-    const Center(
-      child: Text("Orders Page"),
-    ),
+    const OrdersPage(),
     const Center(
       child: Text("Settings Page"),
     ),
