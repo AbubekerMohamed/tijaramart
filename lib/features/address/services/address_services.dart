@@ -48,4 +48,52 @@ class AddressServices {
       if (context.mounted) showSnackBar(context, error.toString());
     }
   }
+
+  void placeOrder({
+    required BuildContext context,
+    required String address,
+    required double totalSum,
+  }) async {
+    try {
+      http.Response response = await http.post(
+        Uri.parse("$backendURL/api/order"),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': context.mounted
+              ? Provider.of<UserProvider>(
+                  context,
+                  listen: false,
+                ).user.token
+              : '',
+        },
+        body: jsonEncode({
+          'address': address,
+          'cart': Provider.of<UserProvider>(
+            context,
+            listen: false,
+          ).user.cart,
+          'totalPrice': totalSum,
+        }),
+      );
+      if (context.mounted) {
+        httpErrorHandle(
+          response: response,
+          context: context,
+          onSuccess: () {
+            showSnackBar(context, 'Your order has been placed!');
+            UserModel user = Provider.of<UserProvider>(
+              context,
+              listen: false,
+            ).user.copyWith(cart: []);
+            Provider.of<UserProvider>(
+              context,
+              listen: false,
+            ).setUserFromModel(user);
+          },
+        );
+      }
+    } catch (error) {
+      if (context.mounted) showSnackBar(context, error.toString());
+    }
+  }
 }

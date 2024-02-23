@@ -132,9 +132,21 @@ class _AddressScreenState extends State<AddressScreen> {
     if (context.watch<UserProvider>().user.address.isEmpty) {
       _addressServices.saveUserAddress(context: context, address: addressToUse);
     }
+    _addressServices.placeOrder(
+        context: context,
+        address: addressToUse,
+        totalSum: double.parse(widget.totalAmount));
   }
 
-  void onApplePayResult(res) {}
+  void onApplePayResult(res) {
+    if (context.watch<UserProvider>().user.address.isEmpty) {
+      _addressServices.saveUserAddress(context: context, address: addressToUse);
+    }
+    _addressServices.placeOrder(
+        context: context,
+        address: addressToUse,
+        totalSum: double.parse(widget.totalAmount));
+  }
 
   @override
   void initState() {
