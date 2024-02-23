@@ -5,8 +5,10 @@ import 'package:tijaramart/features/admin/screens/add_product_screen.dart';
 import 'package:tijaramart/features/auth/screens/auth_screen.dart';
 import 'package:tijaramart/features/home/screens/category_screen.dart';
 import 'package:tijaramart/features/home/screens/home_screen.dart';
+import 'package:tijaramart/features/order_details/screens/order_details_screen.dart';
 import 'package:tijaramart/features/product_details/screens/product_details_screen.dart';
 import 'package:tijaramart/features/search/screens/search_screen.dart';
+import 'package:tijaramart/models/order_model.dart';
 import 'package:tijaramart/models/product_nodel.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
@@ -62,6 +64,15 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => AddressScreen(
           totalAmount: totalAmount,
+        ),
+      );
+    case OrderDetailsScreen.routeName:
+      var order = routeSettings.arguments as OrderModel;
+
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => OrderDetailsScreen(
+          order: order,
         ),
       );
     default:
