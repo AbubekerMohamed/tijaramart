@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
+import 'package:tijaramart/common/components/custom_button.dart';
 import 'package:tijaramart/common/components/custom_textfield.dart';
 import 'package:tijaramart/common/components/snackbar.dart';
 import 'package:tijaramart/constants/global_variables.dart';
@@ -126,6 +127,16 @@ class _AddressScreenState extends State<AddressScreen> {
       showSnackBar(context, "Insert your address");
       throw Exception("Please insert all fields");
     }
+    if (Provider.of<UserProvider>(context, listen: false)
+        .user
+        .address
+        .isEmpty) {
+      _addressServices.saveUserAddress(context: context, address: addressToUse);
+    }
+    _addressServices.placeOrder(
+        context: context,
+        address: addressToUse,
+        totalSum: double.parse(widget.totalAmount));
   }
 
   void onGooglePayResult(res) {
@@ -187,6 +198,9 @@ class _AddressScreenState extends State<AddressScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
+              const SizedBox(
+                height: 25,
+              ),
               if (address.isNotEmpty)
                 Column(
                   children: [
@@ -284,6 +298,15 @@ class _AddressScreenState extends State<AddressScreen> {
                 ),
                 width: double.infinity,
                 height: 50,
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              CustomButton(
+                text: "Pay4et",
+                onPressed: () {
+                  payPressed(address);
+                },
               ),
             ],
           ),

@@ -14,7 +14,7 @@ class OrdersSection extends StatefulWidget {
 
 class _OrdersSectionState extends State<OrdersSection> {
   List<OrderModel>? orders;
-  AccountServices _accountServices = AccountServices();
+  final AccountServices _accountServices = AccountServices();
 
   @override
   void initState() {
@@ -24,6 +24,7 @@ class _OrdersSectionState extends State<OrdersSection> {
 
   void fetchOrders() async {
     orders = await _accountServices.fetchMyOrders(context: context);
+    setState(() {});
   }
 
   @override

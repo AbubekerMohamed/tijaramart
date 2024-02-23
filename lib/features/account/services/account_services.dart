@@ -14,17 +14,17 @@ class AccountServices {
     required BuildContext context,
   }) async {
     List<OrderModel> ordersList = [];
+    final userProvider = Provider.of<UserProvider>(
+      context,
+      listen: false,
+    );
+
     try {
       http.Response response = await http.get(
         Uri.parse("$backendURL/api/orders/me"),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          'x-auth-token': context.mounted
-              ? Provider.of<UserProvider>(
-                  context,
-                  listen: false,
-                ).user.token
-              : '',
+          'x-auth-token': userProvider.user.token,
         },
       );
       if (context.mounted) {
@@ -32,11 +32,11 @@ class AccountServices {
           response: response,
           context: context,
           onSuccess: () {
-            for (var i = 0; i < jsonDecode(response.body); i++) {
+            for (var i = 0; i < jsonDecode(response.body).length; i++) {
               ordersList.add(
                 OrderModel.fromJson(
                   jsonEncode(
-                    jsonDecode(response.body[i]),
+                    jsonDecode(response.body)[i],
                   ),
                 ),
               );
