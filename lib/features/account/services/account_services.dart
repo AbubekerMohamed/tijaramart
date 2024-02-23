@@ -6,14 +6,14 @@ import 'package:provider/provider.dart';
 import 'package:tijaramart/common/components/snackbar.dart';
 import 'package:tijaramart/constants/error_handlers.dart';
 import 'package:tijaramart/constants/global_variables.dart';
-import 'package:tijaramart/models/product_nodel.dart';
+import 'package:tijaramart/models/order_model.dart';
 import 'package:tijaramart/providers/user_provider.dart';
 
 class AddressServices {
-  Future<List<ProductModel>> fetchMyOrders({
+  Future<List<OrderModel>> fetchMyOrders({
     required BuildContext context,
   }) async {
-    List<ProductModel> ordersList = [];
+    List<OrderModel> ordersList = [];
     try {
       http.Response response = await http.get(
         Uri.parse("$backendURL/api/orders/me"),
@@ -34,7 +34,7 @@ class AddressServices {
           onSuccess: () {
             for (var i = 0; i < jsonDecode(response.body); i++) {
               ordersList.add(
-                ProductModel.fromJson(
+                OrderModel.fromJson(
                   jsonEncode(
                     jsonDecode(response.body[i]),
                   ),
