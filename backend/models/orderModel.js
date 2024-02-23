@@ -23,7 +23,7 @@ const orderSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  orderAt: {
+  orderedAt: {
     type: Number,
     required: true,
   },
