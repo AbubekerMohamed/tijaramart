@@ -64,4 +64,29 @@ userRouter.delete("/api/remove-from-cart/:id", auth, async (req, res) => {
   }
 });
 
+// save users address
+userRouter.post("/api/save-user-address", auth, async (req, res) => {
+  try {
+    const { address } = req.body;
+
+    let user = await UserModel.findById(req.user);
+    user.address = address;
+    user = await user.save();
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// order a product
+userRouter.post("/api/order", auth, async (req, res) => {
+  try {
+    const { cart, totalPrice, address } = req.body;
+
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = userRouter;
