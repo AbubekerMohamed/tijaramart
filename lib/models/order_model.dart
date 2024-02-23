@@ -11,6 +11,7 @@ class OrderModel {
   final String userId;
   final int orderedAt;
   final int status;
+  final double totalPrice;
 
   OrderModel({
     required this.id,
@@ -20,6 +21,7 @@ class OrderModel {
     required this.userId,
     required this.orderedAt,
     required this.status,
+    required this.totalPrice,
   });
 
   Map<String, dynamic> toMap() {
@@ -31,12 +33,13 @@ class OrderModel {
       'userId': userId,
       'orderedAt': orderedAt,
       'status': status,
+      'totalPrice': totalPrice,
     };
   }
 
   factory OrderModel.fromMap(Map<String, dynamic> map) {
     return OrderModel(
-      id: map['id'] ?? '',
+      id: map['_id'] ?? '',
       products: List<ProductModel>.from(
         map['products']?.map(
           (x) => ProductModel.fromMap(x['product']),
@@ -47,6 +50,7 @@ class OrderModel {
       userId: map['userId'] ?? '',
       orderedAt: map['orderedAt']?.toInt() ?? 0,
       status: map['status']?.toInt() ?? 0,
+      totalPrice: map['totalPrice']?.toDouble() ?? 0.0,
     );
   }
 

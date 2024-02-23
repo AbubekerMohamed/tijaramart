@@ -3,6 +3,7 @@ import 'package:tijaramart/common/components/loader.dart';
 import 'package:tijaramart/constants/global_variables.dart';
 import 'package:tijaramart/features/account/components/product_item.dart';
 import 'package:tijaramart/features/account/services/account_services.dart';
+import 'package:tijaramart/features/order_details/screens/order_details_screen.dart';
 import 'package:tijaramart/models/order_model.dart';
 
 class OrdersSection extends StatefulWidget {
@@ -61,8 +62,15 @@ class _OrdersSectionState extends State<OrdersSection> {
                     scrollDirection: Axis.horizontal,
                     itemCount: orders?.length,
                     itemBuilder: ((context, index) {
-                      return ProductItem(
-                          imageUrl: orders![index].products[0].images[0]);
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, OrderDetailsScreen.routeName,
+                              arguments: orders![index]);
+                        },
+                        child: ProductItem(
+                            imageUrl: orders![index].products[0].images[0]),
+                      );
                     })),
               ),
             ],
