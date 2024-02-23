@@ -5,11 +5,16 @@ import 'package:provider/provider.dart';
 import 'package:tijaramart/common/components/custom_textfield.dart';
 import 'package:tijaramart/common/components/snackbar.dart';
 import 'package:tijaramart/constants/global_variables.dart';
+import 'package:tijaramart/features/address/services/address_services.dart';
 import 'package:tijaramart/providers/user_provider.dart';
 
 class AddressScreen extends StatefulWidget {
   static const String routeName = "address-screen";
-  const AddressScreen({super.key});
+  final String totalAmount;
+  const AddressScreen({
+    super.key,
+    required this.totalAmount,
+  });
 
   @override
   State<AddressScreen> createState() => _AddressScreenState();
@@ -21,7 +26,7 @@ class _AddressScreenState extends State<AddressScreen> {
   final TextEditingController _areaController = TextEditingController();
   final TextEditingController _pincodeController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
-
+  final AddressServices _addressServices = AddressServices();
   final List<PaymentItem> _paymentItems = [
     const PaymentItem(
       label: 'Total',
@@ -124,8 +129,23 @@ class _AddressScreenState extends State<AddressScreen> {
     }
   }
 
-  void onGooglePayResult(res) {}
+  void onGooglePayResult(res) {
+    if (context.watch<UserProvider>().user.address.isEmpty) {
+      _addressServices.saveUserAddress(context: context, address: addressToUse);
+    }
+  }
+
   void onApplePayResult(res) {}
+
+  @override
+  void initState() {
+    super.initState();
+    _paymentItems.add(PaymentItem(
+      amount: widget.totalAmount,
+      label: "Total Amount",
+      status: PaymentItemStatus.final_price,
+    ));
+  }
 
   @override
   void dispose() {
@@ -238,6 +258,7 @@ class _AddressScreenState extends State<AddressScreen> {
                 ),
                 width: double.infinity,
                 height: 50,
+                onPressed: () => payPressed(address),
               ),
               GooglePayButton(
                 onPressed: () => payPressed(address),
