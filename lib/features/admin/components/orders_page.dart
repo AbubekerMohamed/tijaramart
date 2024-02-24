@@ -3,6 +3,7 @@ import 'package:tijaramart/common/components/loader.dart';
 import 'package:tijaramart/features/account/components/product_item.dart';
 import 'package:tijaramart/features/admin/screens/add_product_screen.dart';
 import 'package:tijaramart/features/admin/services/admin_service.dart';
+import 'package:tijaramart/features/order_details/screens/order_details_screen.dart';
 import 'package:tijaramart/models/order_model.dart';
 
 class OrdersPage extends StatefulWidget {
@@ -24,6 +25,7 @@ class _OrdersPageState extends State<OrdersPage> {
 
   void getOrders() async {
     ordersList = await _adminService.getAllOrders(context);
+    setState(() {});
   }
 
   @override
@@ -36,10 +38,16 @@ class _OrdersPageState extends State<OrdersPage> {
                 crossAxisCount: 2),
             itemBuilder: (contex, index) {
               final orderData = ordersList![index];
-              return SizedBox(
-                height: 120,
-                child:
-                    ProductItem(imageUrl: orderData.products[index].images[0]),
+              return GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, OrderDetailsScreen.routeName,
+                      arguments: orderData);
+                },
+                child: SizedBox(
+                  height: 120,
+                  child: ProductItem(
+                      imageUrl: orderData.products[index].images[0]),
+                ),
               );
             },
           );

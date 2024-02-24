@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 // import from files
 const adminMiddleware = require("../middlewares/adminMiddleware");
 const { ProductModel } = require("../models/productModel");
-const { OrderModel } = require("../models/orderModel");
+const OrderModel = require("../models/orderModel");
 
 const adminRouter = express.Router();
 
