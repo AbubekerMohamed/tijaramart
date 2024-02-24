@@ -180,4 +180,38 @@ class AdminService {
     }
     return ordersList;
   }
+
+  // changing the steps of orders
+  void updateOrderStatus({
+    required BuildContext context,
+    required int status,
+    required OrderModel order,
+    required VoidCallback onSuccess,
+  }) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    try {
+      http.Response response = await http.post(
+        Uri.parse('$backendURL/admin/update-order-status'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+        body: jsonEncode({
+          'id': order.id,
+          'status': status,
+        }),
+      );
+      if (context.mounted) {
+        httpErrorHandle(
+          response: response,
+          context: context,
+          onSuccess: onSuccess,
+        );
+      }
+    } catch (error) {
+      if (context.mounted) {
+        showSnackBar(context, "Error from response ${error.toString()}");
+      }
+    }
+  }
 }

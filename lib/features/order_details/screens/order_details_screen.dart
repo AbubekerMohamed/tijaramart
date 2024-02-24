@@ -1,10 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable, prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:tijaramart/common/components/custom_button.dart';
 import 'package:tijaramart/constants/global_variables.dart';
+import 'package:tijaramart/features/admin/services/admin_service.dart';
 import 'package:tijaramart/features/search/screens/search_screen.dart';
 
 import 'package:tijaramart/models/order_model.dart';
+import 'package:tijaramart/providers/user_provider.dart';
 
 class OrderDetailsScreen extends StatefulWidget {
   static const String routeName = "/order-details-screen";
@@ -20,6 +24,7 @@ class OrderDetailsScreen extends StatefulWidget {
 
 class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   int statusStep = 0;
+  AdminService _adminService = AdminService();
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
   }
@@ -30,8 +35,26 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     statusStep = widget.order.status;
   }
 
+  void updateOrderStatus(int status) async {
+    _adminService.updateOrderStatus(
+        context: context,
+        status: status,
+        order: widget.order,
+        onSuccess: () {
+          setState(() {
+            if (status == 1) {
+              statusStep = statusStep + 1;
+            } else {
+              statusStep = statusStep - 1;
+            }
+          });
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context).user;
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -208,7 +231,33 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               ),
               Stepper(
                 controlsBuilder: (context, details) {
-                  return const SizedBox();
+                  return user.role == 'admin'
+                      ? Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Column(
+                            children: [
+                              if (statusStep != 0)
+                                CustomButton(
+                                  text: "Rollback",
+                                  onPressed: () {
+                                    updateOrderStatus(0);
+                                  },
+                                ),
+                              SizedBox(
+                                height: 5.0,
+                              ),
+                              if (statusStep != 3)
+                                CustomButton(
+                                  color: Colors.deepPurple,
+                                  text: "Done",
+                                  onPressed: () {
+                                    updateOrderStatus(1);
+                                  },
+                                ),
+                            ],
+                          ),
+                        )
+                      : const SizedBox();
                 },
                 currentStep: statusStep,
                 steps: [

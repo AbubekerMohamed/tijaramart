@@ -60,4 +60,25 @@ adminRouter.get("/admin/get-orders", adminMiddleware, async (req, res) => {
   }
 });
 
+// delete product route
+adminRouter.post(
+  "/admin/update-order-status",
+  adminMiddleware,
+  async (req, res) => {
+    try {
+      const { id, status } = req.body;
+      let updatedOrder = await OrderModel.findById(id);
+      if (status == 1) {
+        updatedOrder.status = updatedOrder.status + 1;
+      } else {
+        updatedOrder.status = updatedOrder.status - 1;
+      }
+      updatedOrder = await updatedOrder.save();
+      res.json(updatedOrder);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+);
+
 module.exports = adminRouter;
