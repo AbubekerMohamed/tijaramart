@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tijaramart/common/components/snackbar.dart';
 import 'package:tijaramart/constants/error_handlers.dart';
 import 'package:tijaramart/constants/global_variables.dart';
+import 'package:tijaramart/features/auth/screens/auth_screen.dart';
 import 'package:tijaramart/models/order_model.dart';
 import 'package:tijaramart/providers/user_provider.dart';
 
@@ -48,5 +50,19 @@ class AccountServices {
       if (context.mounted) showSnackBar(context, error.toString());
     }
     return ordersList;
+  }
+
+  void logOut(BuildContext context) async {
+    try {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      await sharedPreferences.setString('x-auth-token', "");
+      if (context.mounted) {
+        Navigator.pushNamedAndRemoveUntil(
+            context, AuthScreen.routeName, (route) => false);
+      }
+    } catch (error) {
+      if (context.mounted) showSnackBar(context, error.toString());
+    }
   }
 }
