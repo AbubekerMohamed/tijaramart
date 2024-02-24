@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -56,11 +58,10 @@ class AccountServices {
     try {
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      await sharedPreferences.setString('x-auth-token', "");
-      if (context.mounted) {
-        Navigator.pushNamedAndRemoveUntil(
-            context, AuthScreen.routeName, (route) => false);
-      }
+      sharedPreferences.remove('x-auth-token');
+
+      Navigator.pushNamedAndRemoveUntil(
+          context, AuthScreen.routeName, (route) => false);
     } catch (error) {
       if (context.mounted) showSnackBar(context, error.toString());
     }

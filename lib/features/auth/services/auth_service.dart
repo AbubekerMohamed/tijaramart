@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tijaramart/common/components/snackbar.dart';
 import 'package:tijaramart/constants/error_handlers.dart';
 import 'package:tijaramart/constants/global_variables.dart';
+import 'package:tijaramart/features/auth/screens/auth_screen.dart';
 import 'package:tijaramart/models/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:tijaramart/providers/user_provider.dart';
@@ -37,7 +40,6 @@ class AuthService {
             'Content-Type': 'application/json; charset=UTF-8'
           });
 
-      // ignore: use_build_context_synchronously
       httpErrorHandle(
         response: res,
         context: context,
@@ -49,7 +51,6 @@ class AuthService {
         },
       );
     } catch (error) {
-      // ignore: use_build_context_synchronously
       showSnackBar(
         context,
         error.toString(),
@@ -74,23 +75,18 @@ class AuthService {
             'Content-Type': 'application/json; charset=UTF-8'
           });
 
-      // ignore: use_build_context_synchronously
       httpErrorHandle(
         response: res,
         context: context,
         onSuccess: () async {
           SharedPreferences sharedPreferences =
               await SharedPreferences.getInstance();
-
-          await sharedPreferences.setString(
-              "x-auth-token", jsonDecode(res.body)['token']);
-
-          // ignore: use_build_context_synchronously
           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
+          sharedPreferences.setString(
+              "x-auth-token", jsonDecode(res.body)['token']);
         },
       );
     } catch (error) {
-      // ignore: use_build_context_synchronously
       showSnackBar(
         context,
         error.toString(),
@@ -123,18 +119,14 @@ class AuthService {
           },
         );
 
-        if (context.mounted) {
-          var userProvider = Provider.of<UserProvider>(context, listen: false);
-          userProvider.setUser(userResponse.body);
-        }
+        var userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.setUser(userResponse.body);
       }
     } catch (error) {
-      if (context.mounted) {
-        showSnackBar(
-          context,
-          error.toString(),
-        );
-      }
+      showSnackBar(
+        context,
+        error.toString(),
+      );
     }
   }
 }
