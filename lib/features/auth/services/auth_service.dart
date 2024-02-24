@@ -81,11 +81,12 @@ class AuthService {
         onSuccess: () async {
           SharedPreferences sharedPreferences =
               await SharedPreferences.getInstance();
-          if (context.mounted) {
-            Provider.of<UserProvider>(context, listen: false).setUser(res.body);
-          }
-          sharedPreferences.setString(
+
+          await sharedPreferences.setString(
               "x-auth-token", jsonDecode(res.body)['token']);
+
+          // ignore: use_build_context_synchronously
+          Provider.of<UserProvider>(context, listen: false).setUser(res.body);
         },
       );
     } catch (error) {
