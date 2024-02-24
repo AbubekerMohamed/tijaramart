@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tijaramart/common/components/loader.dart';
 import 'package:tijaramart/features/account/components/product_item.dart';
-import 'package:tijaramart/features/admin/screens/add_product_screen.dart';
 import 'package:tijaramart/features/admin/services/admin_service.dart';
 import 'package:tijaramart/features/order_details/screens/order_details_screen.dart';
 import 'package:tijaramart/models/order_model.dart';
