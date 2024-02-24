@@ -1,12 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:charts_flutter_updated/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:tijaramart/common/components/loader.dart';
-import 'package:tijaramart/features/account/components/product_item.dart';
+import 'package:tijaramart/features/admin/components/chart_earnings_by_category.dart';
 import 'package:tijaramart/features/admin/services/admin_service.dart';
-import 'package:tijaramart/features/order_details/screens/order_details_screen.dart';
 import 'package:tijaramart/models/admin_model/sale_model.dart';
-import 'package:tijaramart/models/order_model.dart';
 
 class AnalyticsPage extends StatefulWidget {
   const AnalyticsPage({super.key});
@@ -46,6 +45,21 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
+                  ),
+                ),
+                AspectRatio(
+                  aspectRatio: 1.6,
+                  child: ChartEarningsByCategory(
+                    seriesList: [
+                      charts.Series(
+                        id: "Sales",
+                        data: earnings!,
+                        domainFn: (Sale sales, _) => sales.label,
+                        measureFn: (Sale sales, _) => sales.earning,
+                        seriesColor: charts.ColorUtil.fromDartColor(
+                            Colors.deepPurple.shade300),
+                      )
+                    ],
                   ),
                 )
               ],

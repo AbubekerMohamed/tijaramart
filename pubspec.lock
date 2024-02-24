@@ -33,6 +33,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  built_collection:
+    dependency: transitive
+    description:
+      name: built_collection
+      sha256: "376e3dd27b51ea877c28d525560790aee2e6fbb5f20e2f85d5081027d94e2100"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.1.1"
+  built_value:
+    dependency: transitive
+    description:
+      name: built_value
+      sha256: fedde275e0a6b798c3296963c5cd224e3e1b55d0e478d5b7e65e6b540f363a0e
+      url: "https://pub.dev"
+    source: hosted
+    version: "8.9.1"
   carousel_slider:
     dependency: "direct main"
     description:
@@ -49,6 +65,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.0"
+  charts_common_updated:
+    dependency: transitive
+    description:
+      name: charts_common_updated
+      sha256: b22b88a188e5ae1cdcef44eb0a032a9b023a8f7a6ff76061714892408f2cd6ce
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.13.0"
+  charts_flutter_updated:
+    dependency: "direct main"
+    description:
+      name: charts_flutter_updated
+      sha256: "2825bbb30e946e178b2673677271dd55760d91075d8171a66d10c19efaa4ce5f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.13.0"
   clock:
     dependency: transitive
     description:
@@ -97,14 +129,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
-  equatable:
-    dependency: transitive
-    description:
-      name: equatable
-      sha256: c2b87cb7756efdf69892005af546c56c0b5037f54d2a88269b4f347a505e3ca2
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.5"
   fake_async:
     dependency: transitive
     description:
@@ -137,14 +161,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.1"
-  fl_chart:
-    dependency: "direct main"
+  fixnum:
+    dependency: transitive
     description:
-      name: fl_chart
-      sha256: "00b74ae680df6b1135bdbea00a7d1fc072a9180b7c3f3702e4b19a9943f5ed7d"
+      name: fixnum
+      sha256: "25517a4deb0c03aa0f32fd12db525856438902d9c16536311e76cdc57b31d7d1"
       url: "https://pub.dev"
     source: hosted
-    version: "0.66.2"
+    version: "1.1.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -237,6 +261,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  logging:
+    dependency: transitive
+    description:
+      name: logging
+      sha256: "623a88c9594aa774443aa3eb2d41807a48486b5613e67599fb4c41c0ad47c340"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   matcher:
     dependency: transitive
     description:

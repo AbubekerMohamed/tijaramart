@@ -117,7 +117,7 @@ adminRouter.get("/admin/analytics", adminMiddleware, async (req, res) => {
 
 async function fetchTotalEarningsByCategory(category) {
   let earnings = 0;
-  let ordersInCategory = OrderModel.find({
+  let ordersInCategory = await OrderModel.find({
     "products.product.category": category,
   });
   for (let i = 0; i < ordersInCategory.length; i++) {
