@@ -3,6 +3,7 @@ import 'package:tijaramart/constants/global_variables.dart';
 import 'package:tijaramart/features/account/components/greet_user.dart';
 import 'package:tijaramart/features/account/components/orders_section.dart';
 import 'package:tijaramart/features/account/components/top_chips.dart';
+import 'package:tijaramart/features/account/services/account_services.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
@@ -46,17 +47,19 @@ class AccountScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: const Column(
+      body: Column(
         children: [
-          GreetUser(),
-          SizedBox(
+          GreetUser(onClick: () {
+            AccountServices().logOut(context);
+          }),
+          const SizedBox(
             height: 10,
           ),
-          TopChips(),
-          SizedBox(
+          const TopChips(),
+          const SizedBox(
             height: 20,
           ),
-          OrdersSection(),
+          const OrdersSection(),
         ],
       ),
     );
