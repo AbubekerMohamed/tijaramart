@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // slim pc ip 192.168.43.29
 // work pc Ethernet adapter Ethernet 172.20.102.160
-const String backendURL = "http://172.20.108.117:3000";
+const String backendURL = "https://tij-backend-vercel.vercel.app";
 
 class GlobalVariables {
   // COLORS
