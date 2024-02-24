@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:tijaramart/common/components/snackbar.dart';
 import 'package:tijaramart/constants/error_handlers.dart';
 import 'package:tijaramart/constants/global_variables.dart';
+import 'package:tijaramart/models/admin_model/sale_model.dart';
 import 'package:tijaramart/models/order_model.dart';
 import 'package:tijaramart/models/product_nodel.dart';
 import 'package:tijaramart/providers/user_provider.dart';
@@ -213,5 +214,45 @@ class AdminService {
         showSnackBar(context, "Error from response ${error.toString()}");
       }
     }
+  }
+
+  Future<Map<String, dynamic>> getEarnings(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    List<Sale> sales = [];
+    int totalEarning = 0;
+
+    try {
+      http.Response response = await http.get(
+        Uri.parse('$backendURL/admin/analytics'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+      );
+      if (context.mounted) {
+        httpErrorHandle(
+            response: response,
+            context: context,
+            onSuccess: () {
+              var res = jsonDecode(response.body);
+              totalEarning = res['totalEarnings'];
+              sales = [
+                Sale("Mobiles", res['mobileEarnings']),
+                Sale("Essentials", res['essentialEarnings']),
+                Sale("Appliances", res['applianceEarnings']),
+                Sale("Books", res['bookEarnings']),
+                Sale("Fashions", res['fashionEarnings']),
+              ];
+            });
+      }
+    } catch (error) {
+      if (context.mounted) {
+        showSnackBar(context, "Error from response ${error.toString()}");
+      }
+    }
+    return {
+      'sales': sales,
+      'totalEarnings': totalEarning,
+    };
   }
 }

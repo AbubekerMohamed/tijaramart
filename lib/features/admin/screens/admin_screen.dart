@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:tijaramart/constants/global_variables.dart';
+import 'package:tijaramart/features/admin/components/analytics_page.dart';
 import 'package:tijaramart/features/admin/components/orders_page.dart';
 import 'package:tijaramart/features/admin/components/products_page.dart';
 
@@ -16,9 +17,7 @@ class _AdminScreenState extends State<AdminScreen> {
 
   List<Widget> pages = [
     const ProductsPage(),
-    const Center(
-      child: Text("Analytics Page"),
-    ),
+    const AnalyticsPage(),
     const OrdersPage(),
     const Center(
       child: Text("Settings Page"),

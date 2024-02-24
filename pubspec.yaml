@@ -46,6 +46,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   pay: ^1.1.2
   intl: ^0.18.1
+  fl_chart: ^0.66.2
 
 dev_dependencies:
   flutter_test:
