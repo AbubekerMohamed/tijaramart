@@ -5,6 +5,7 @@ import 'package:tijaramart/features/auth/components/sign_in_page.dart';
 import 'package:tijaramart/features/auth/components/sign_up_page.dart';
 import 'package:tijaramart/features/auth/services/auth_service.dart';
 
+import '../components/social_auths.dart';
 import '../components/social_icons_card.dart';
 
 enum Auth {
@@ -70,23 +71,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     updateRememberMe: updateRememberMe,
                   ),
                 SizedBox(height: ScreenSizeConfig.screenHeight * 0.08),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SocialIconsCard(
-                      icon: "assets/icons/google-icon.svg",
-                      press: () {},
-                    ),
-                    SocialIconsCard(
-                      icon: "assets/icons/facebook-2.svg",
-                      press: () {},
-                    ),
-                    SocialIconsCard(
-                      icon: "assets/icons/twitter.svg",
-                      press: () {},
-                    ),
-                  ],
-                ),
+                const SocialAuths(),
                 SizedBox(height: ScreenSizeConfig.screenHeight * 0.08),
                 _auth == Auth.signin
                     ? Row(

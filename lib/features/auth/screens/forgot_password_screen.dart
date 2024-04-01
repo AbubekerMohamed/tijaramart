@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tijaramart/features/auth/components/forgot_password_body.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   static const String routeName = "/forgot_password";
@@ -7,9 +8,10 @@ class ForgotPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Forgot Password"),
+        centerTitle: true,
+        title: const Text("Forgot Password"),
       ),
-      body: Container(),
+      body: const ForgotPasswordBody(),
     );
   }
 }
