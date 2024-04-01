@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import '../../../common/components/custom_button.dart';
 import '../../../common/components/custom_textfield.dart';
+import '../../../common/utils/screen_size_config.dart';
 import '../../../constants/global_variables.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -23,49 +24,73 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: GlobalVariables.greyBackgroundCOlor,
-        borderRadius: BorderRadius.circular(30.0),
-      ),
-      padding: const EdgeInsets.all(8),
-      //color: GlobalVariables.greyBackgroundCOlor,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Form(
-          key: _signUpFormKey,
-          child: Column(
-            children: [
-              CustomTextField(
-                editingController: nameController,
-                hintText: "Full Name",
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              CustomTextField(
-                editingController: emailController,
-                hintText: "E Mail",
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              CustomTextField(
-                editingController: passwordController,
-                hintText: "Password",
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              CustomButton(
-                text: "Sign Up",
-                onPressed: () {
-                  if (_signUpFormKey.currentState!.validate()) {
-                    signUpUser();
-                  }
-                },
-              )
-            ],
-          ),
+      padding: EdgeInsets.all(getProportionateScreenWidth(8)),
+      child: Form(
+        key: _signUpFormKey,
+        child: Column(
+          children: [
+            CustomTextField(
+              validateField: (val) {
+                if (val == null || val.isEmpty) {
+                  return "your full name is required";
+                } else if (val.length < 6) {
+                  return "full name field must be at least 4 characters";
+                }
+                return null;
+              },
+              editingController: nameController,
+              hintText: "Full Name",
+              iconPath: "assets/icons/User Icon.svg",
+            ),
+            SizedBox(
+              height: getProportionateScreenHeight(30),
+            ),
+            CustomTextField(
+              validateField: (val) {
+                if (val == null || val.isEmpty) {
+                  return "email field is required";
+                } else if (!emailValidatorRegExp.hasMatch(val)) {
+                  return "email entered is not a correct email";
+                }
+                return null;
+              },
+              editingController: emailController,
+              hintText: "E Mail",
+              iconPath: 'assets/icons/Mail.svg',
+              textInputType: TextInputType.emailAddress,
+            ),
+            SizedBox(
+              height: getProportionateScreenHeight(30),
+            ),
+            CustomTextField(
+              validateField: (val) {
+                if (val == null || val.isEmpty) {
+                  return "password field is required";
+                } else if (val.length < 6) {
+                  return "password must be at least 6 characters";
+                }
+                return null;
+              },
+              editingController: passwordController,
+              hintText: "Password",
+              iconPath: 'assets/icons/Lock.svg',
+              isObscureText: true,
+            ),
+            SizedBox(
+              height: getProportionateScreenHeight(30),
+            ),
+            CustomButton(
+              text: "Sign Up",
+              onPressed: () {
+                if (_signUpFormKey.currentState!.validate()) {
+                  signUpUser();
+                }
+              },
+            ),
+            SizedBox(
+              height: getProportionateScreenHeight(30),
+            ),
+          ],
         ),
       ),
     );
