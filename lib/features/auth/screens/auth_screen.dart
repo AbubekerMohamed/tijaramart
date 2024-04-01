@@ -39,7 +39,7 @@ class _AuthScreenState extends State<AuthScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: ScreenSizeConfig.screenHeight * 0.04),
+                SizedBox(height: ScreenSizeConfig.screenHeight * 0.06),
                 Text(
                   "Welcome",
                   style: TextStyle(
@@ -53,7 +53,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: getProportionateScreenWidth(10)),
                 ),
-                SizedBox(height: ScreenSizeConfig.screenHeight * 0.08),
+                SizedBox(height: ScreenSizeConfig.screenHeight * 0.06),
                 if (_auth == Auth.signup)
                   SignUpPage(
                     nameController: _nameController,
