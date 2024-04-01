@@ -6,7 +6,6 @@ import 'package:tijaramart/features/auth/components/sign_up_page.dart';
 import 'package:tijaramart/features/auth/services/auth_service.dart';
 
 import '../components/social_auths.dart';
-import '../components/social_icons_card.dart';
 
 enum Auth {
   signin,
@@ -41,19 +40,43 @@ class _AuthScreenState extends State<AuthScreen> {
             child: Column(
               children: [
                 SizedBox(height: ScreenSizeConfig.screenHeight * 0.06),
-                Text(
-                  "Welcome",
-                  style: TextStyle(
-                    fontSize: getProportionateScreenWidth(28),
-                    fontWeight: FontWeight.bold,
-                    color: kPrimaryColor,
-                  ),
-                ),
-                Text(
-                  "Sign in with your email and password  \nor continue with social media",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: getProportionateScreenWidth(10)),
-                ),
+                _auth == Auth.signin
+                    ? Column(
+                        children: [
+                          Text(
+                            "Welcome Back",
+                            style: TextStyle(
+                              fontSize: getProportionateScreenWidth(28),
+                              fontWeight: FontWeight.bold,
+                              color: kPrimaryColor,
+                            ),
+                          ),
+                          Text(
+                            "Sign in with your email and password  \nor continue with social media",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: getProportionateScreenWidth(10)),
+                          ),
+                        ],
+                      )
+                    : Column(
+                        children: [
+                          Text(
+                            "Register Account",
+                            style: TextStyle(
+                              fontSize: getProportionateScreenWidth(28),
+                              fontWeight: FontWeight.bold,
+                              color: kPrimaryColor,
+                            ),
+                          ),
+                          Text(
+                            "Complete your profile \nor continue with social media",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: getProportionateScreenWidth(10)),
+                          ),
+                        ],
+                      ),
                 SizedBox(height: ScreenSizeConfig.screenHeight * 0.06),
                 if (_auth == Auth.signup)
                   SignUpPage(
