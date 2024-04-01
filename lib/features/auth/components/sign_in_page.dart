@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:tijaramart/common/utils/screen_size_config.dart';
 import 'package:tijaramart/constants/global_variables.dart';
 
@@ -18,7 +19,7 @@ class SignInPage extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final VoidCallback signInUser;
-  final Function(bool?) updateRememberMe;
+  final Function() updateRememberMe;
   final bool rememberMe;
 
   @override
@@ -79,9 +80,14 @@ class SignInPage extends StatelessWidget {
                 Checkbox(
                   value: rememberMe,
                   activeColor: kPrimaryColor,
-                  onChanged: (value) => updateRememberMe(value),
+                  onChanged: (val) {
+                    updateRememberMe();
+                  },
                 ),
-                const Text("Remember me"),
+                GestureDetector(
+                  onTap: updateRememberMe,
+                  child: const Text("Remember me"),
+                ),
                 const Spacer(),
                 GestureDetector(
                   onTap: () => {

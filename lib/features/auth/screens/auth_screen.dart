@@ -5,6 +5,8 @@ import 'package:tijaramart/features/auth/components/sign_in_page.dart';
 import 'package:tijaramart/features/auth/components/sign_up_page.dart';
 import 'package:tijaramart/features/auth/services/auth_service.dart';
 
+import '../components/social_icons_card.dart';
+
 enum Auth {
   signin,
   signup,
@@ -34,89 +36,118 @@ class _AuthScreenState extends State<AuthScreen> {
           padding: EdgeInsets.symmetric(
               horizontal: getProportionateScreenWidth(20),
               vertical: getProportionateScreenHeight(50)),
-          child: Column(
-            children: [
-              SizedBox(height: ScreenSizeConfig.screenHeight * 0.04),
-              Text(
-                "Welcome",
-                style: TextStyle(
-                  fontSize: getProportionateScreenWidth(28),
-                  fontWeight: FontWeight.bold,
-                  color: kPrimaryColor,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: ScreenSizeConfig.screenHeight * 0.04),
+                Text(
+                  "Welcome",
+                  style: TextStyle(
+                    fontSize: getProportionateScreenWidth(28),
+                    fontWeight: FontWeight.bold,
+                    color: kPrimaryColor,
+                  ),
                 ),
-              ),
-              Text(
-                "Sign in with your email and password  \nor continue with social media",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: getProportionateScreenWidth(10)),
-              ),
-              SizedBox(height: ScreenSizeConfig.screenHeight * 0.08),
-              if (_auth == Auth.signup)
-                SignUpPage(
-                  nameController: _nameController,
-                  emailController: _emailController,
-                  passwordController: _passwordController,
-                  signUpUser: signUpUser,
+                Text(
+                  "Sign in with your email and password  \nor continue with social media",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: getProportionateScreenWidth(10)),
                 ),
-              if (_auth == Auth.signin)
-                SignInPage(
-                  emailController: _emailController,
-                  passwordController: _passwordController,
-                  signInUser: signInUser,
-                  rememberMe: rememberMe,
-                  updateRememberMe: updateRememberMe,
-                ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _auth = Auth.signup;
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.black,
-                        backgroundColor: _auth == Auth.signup
-                            ? GlobalVariables.greyBackgroundCOlor
-                            : Colors.white,
-                      ),
-                      child: const Text("Sign Up"),
+                SizedBox(height: ScreenSizeConfig.screenHeight * 0.08),
+                if (_auth == Auth.signup)
+                  SignUpPage(
+                    nameController: _nameController,
+                    emailController: _emailController,
+                    passwordController: _passwordController,
+                    signUpUser: signUpUser,
+                  ),
+                if (_auth == Auth.signin)
+                  SignInPage(
+                    emailController: _emailController,
+                    passwordController: _passwordController,
+                    signInUser: signInUser,
+                    rememberMe: rememberMe,
+                    updateRememberMe: updateRememberMe,
+                  ),
+                SizedBox(height: ScreenSizeConfig.screenHeight * 0.08),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SocialIconsCard(
+                      icon: "assets/icons/google-icon.svg",
+                      press: () {},
                     ),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _auth = Auth.signin;
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.black,
-                        backgroundColor: _auth == Auth.signin
-                            ? GlobalVariables.greyBackgroundCOlor
-                            : Colors.white,
-                      ),
-                      child: const Text("Sign In"),
+                    SocialIconsCard(
+                      icon: "assets/icons/facebook-2.svg",
+                      press: () {},
                     ),
-                  ),
-                ],
-              )
-            ],
+                    SocialIconsCard(
+                      icon: "assets/icons/twitter.svg",
+                      press: () {},
+                    ),
+                  ],
+                ),
+                SizedBox(height: ScreenSizeConfig.screenHeight * 0.08),
+                _auth == Auth.signin
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Don’t have an account? ",
+                            style: TextStyle(
+                                fontSize: getProportionateScreenWidth(16)),
+                          ),
+                          GestureDetector(
+                            onTap: () => setState(
+                              () {
+                                _auth = Auth.signup;
+                              },
+                            ),
+                            child: Text(
+                              "Sign Up",
+                              style: TextStyle(
+                                fontSize: getProportionateScreenWidth(16),
+                                color: kPrimaryColor,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Already have an account? ",
+                            style: TextStyle(
+                                fontSize: getProportionateScreenWidth(16)),
+                          ),
+                          GestureDetector(
+                            onTap: () => setState(
+                              () {
+                                _auth = Auth.signin;
+                              },
+                            ),
+                            child: Text(
+                              "Sign In",
+                              style: TextStyle(
+                                fontSize: getProportionateScreenWidth(16),
+                                color: kPrimaryColor,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  void updateRememberMe(bool? rememberValue) {
+  void updateRememberMe() {
     setState(() {
-      rememberMe = rememberValue ?? false;
+      rememberMe = !rememberMe;
     });
   }
 
