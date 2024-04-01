@@ -5,6 +5,7 @@ import 'package:tijaramart/constants/global_variables.dart';
 
 import '../../../common/components/custom_button.dart';
 import '../../../common/components/custom_textfield.dart';
+import '../screens/forgot_password_screen.dart';
 
 class SignInPage extends StatelessWidget {
   SignInPage({
@@ -91,8 +92,7 @@ class SignInPage extends StatelessWidget {
                 const Spacer(),
                 GestureDetector(
                   onTap: () => {
-                    // Navigator.pushNamed(
-                    //   context, ForgotPasswordScreen.routeName);
+                    Navigator.pushNamed(context, ForgotPasswordScreen.routeName)
                   },
                   child: const Text(
                     "Forgot Password",

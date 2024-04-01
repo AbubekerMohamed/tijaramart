@@ -3,6 +3,7 @@ import 'package:tijaramart/common/components/bottom_navigation.dart';
 import 'package:tijaramart/features/address/screens/address_screen.dart';
 import 'package:tijaramart/features/admin/screens/add_product_screen.dart';
 import 'package:tijaramart/features/auth/screens/auth_screen.dart';
+import 'package:tijaramart/features/auth/screens/forgot_password_screen.dart';
 import 'package:tijaramart/features/home/screens/category_screen.dart';
 import 'package:tijaramart/features/home/screens/home_screen.dart';
 import 'package:tijaramart/features/order_details/screens/order_details_screen.dart';
@@ -17,6 +18,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const AuthScreen(),
+      );
+    case ForgotPasswordScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const ForgotPasswordScreen(),
       );
     case BottomNavigation.routeName:
       return MaterialPageRoute(
