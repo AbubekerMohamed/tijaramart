@@ -8,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tijaramart/common/components/snackbar.dart';
 import 'package:tijaramart/constants/error_handlers.dart';
 import 'package:tijaramart/constants/global_variables.dart';
-import 'package:tijaramart/features/auth/screens/auth_screen.dart';
 import 'package:tijaramart/models/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:tijaramart/providers/user_provider.dart';

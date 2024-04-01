@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tijaramart/common/components/custom_button.dart';
-import 'package:tijaramart/common/components/custom_textfield.dart';
+import 'package:tijaramart/common/utils/screen_size_config.dart';
 import 'package:tijaramart/constants/global_variables.dart';
+import 'package:tijaramart/features/auth/components/sign_in_page.dart';
+import 'package:tijaramart/features/auth/components/sign_up_page.dart';
 import 'package:tijaramart/features/auth/services/auth_service.dart';
 
 enum Auth {
@@ -18,26 +19,53 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  Auth _auth = Auth.signup;
-  final GlobalKey<FormState> _signUpFormKey = GlobalKey<FormState>();
-  final GlobalKey<FormState> _signInFormKey = GlobalKey<FormState>();
+  Auth _auth = Auth.signin;
+
   final AuthService authService = AuthService();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+  bool rememberMe = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.symmetric(
+              horizontal: getProportionateScreenWidth(20),
+              vertical: getProportionateScreenHeight(50)),
           child: Column(
             children: [
-              const Text(
+              SizedBox(height: ScreenSizeConfig.screenHeight * 0.04),
+              Text(
                 "Welcome",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                  fontSize: getProportionateScreenWidth(28),
+                  fontWeight: FontWeight.bold,
+                  color: kPrimaryColor,
+                ),
               ),
+              Text(
+                "Sign in with your email and password  \nor continue with social media",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: getProportionateScreenWidth(10)),
+              ),
+              SizedBox(height: ScreenSizeConfig.screenHeight * 0.08),
+              if (_auth == Auth.signup)
+                SignUpPage(
+                  nameController: _nameController,
+                  emailController: _emailController,
+                  passwordController: _passwordController,
+                  signUpUser: signUpUser,
+                ),
+              if (_auth == Auth.signin)
+                SignInPage(
+                  emailController: _emailController,
+                  passwordController: _passwordController,
+                  signInUser: signInUser,
+                  rememberMe: rememberMe,
+                  updateRememberMe: updateRememberMe,
+                ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -78,94 +106,18 @@ class _AuthScreenState extends State<AuthScreen> {
                     ),
                   ),
                 ],
-              ),
-              if (_auth == Auth.signup)
-                Container(
-                  decoration: BoxDecoration(
-                    color: GlobalVariables.greyBackgroundCOlor,
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  padding: const EdgeInsets.all(8),
-                  //color: GlobalVariables.greyBackgroundCOlor,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Form(
-                      key: _signUpFormKey,
-                      child: Column(
-                        children: [
-                          CustomTextField(
-                            editingController: _nameController,
-                            hintText: "Full Name",
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          CustomTextField(
-                            editingController: _emailController,
-                            hintText: "E Mail",
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          CustomTextField(
-                            editingController: _passwordController,
-                            hintText: "Password",
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          CustomButton(
-                            text: "Sign Up",
-                            onPressed: () {
-                              if (_signUpFormKey.currentState!.validate()) {
-                                signUpUser();
-                              }
-                            },
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              if (_auth == Auth.signin)
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  color: GlobalVariables.greyBackgroundCOlor,
-                  child: Form(
-                    key: _signInFormKey,
-                    child: Column(
-                      children: [
-                        CustomTextField(
-                          editingController: _emailController,
-                          hintText: "E Mail",
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        CustomTextField(
-                          editingController: _passwordController,
-                          hintText: "Password",
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        CustomButton(
-                          text: "Sign In",
-                          onPressed: () {
-                            if (_signInFormKey.currentState!.validate()) {
-                              signInUser();
-                            }
-                          },
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+              )
             ],
           ),
         ),
       ),
     );
+  }
+
+  void updateRememberMe(bool? rememberValue) {
+    setState(() {
+      rememberMe = rememberValue ?? false;
+    });
   }
 
   void signUpUser() {

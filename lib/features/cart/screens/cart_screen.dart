@@ -128,7 +128,6 @@ class _CartScreenState extends State<CartScreen> {
                 onPressed: () {
                   navigateToAddressScreen(sum);
                 },
-                color: Colors.purple,
               ),
             ),
             const SizedBox(

@@ -24,7 +24,7 @@ class OrderDetailsScreen extends StatefulWidget {
 
 class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   int statusStep = 0;
-  AdminService _adminService = AdminService();
+  final AdminService _adminService = AdminService();
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
   }
@@ -248,7 +248,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               ),
                               if (statusStep != 3)
                                 CustomButton(
-                                  color: Colors.deepPurple,
                                   text: "Done",
                                   onPressed: () {
                                     updateOrderStatus(1);

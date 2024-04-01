@@ -236,7 +236,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       child: CustomButton(
                         text: "Add to Cart",
                         onPressed: addToCart,
-                        color: Colors.purple.shade900,
                       ),
                     ),
                     const SizedBox(
