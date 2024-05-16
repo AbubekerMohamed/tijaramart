@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:tijaramart/common/components/custom_button.dart';
 import 'package:tijaramart/common/components/custom_textfield.dart';
@@ -36,7 +37,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final GlobalKey<FormState> _addProductFormKey = GlobalKey<FormState>();
 
   void selectImages() async {
-    var res = await pickImages();
+    var res;
+    if (kIsWeb) {
+      res = await pickWebImages();
+    } else {
+      res = await pickImages();
+    }
+
     setState(() {
       images = res;
     });

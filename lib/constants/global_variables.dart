@@ -10,10 +10,11 @@ class GlobalVariables {
   // COLORS
   static const appBarGradient = LinearGradient(
     colors: [
-      Color.fromARGB(225, 201, 29, 195),
-      Color.fromARGB(255, 95, 97, 209),
+      Color.fromARGB(239, 165, 52, 240),
+      Color.fromARGB(255, 209, 136, 243),
+      Color.fromARGB(255, 209, 135, 243),
     ],
-    stops: [0.5, 1.0],
+    stops: [0.2, 0.7, 0.5],
   );
 
   static const secondaryColor = Color.fromRGBO(0, 115, 255, 1);
@@ -24,11 +25,10 @@ class GlobalVariables {
 
   // STATIC IMAGES
   static const List<String> carouselImages = [
-    'https://images-eu.ssl-images-amazon.com/images/G/31/img21/Wireless/WLA/TS/D37847648_Accessories_savingdays_Jan22_Cat_PC_1500.jpg',
-    'https://images-eu.ssl-images-amazon.com/images/G/31/img2021/Vday/bwl/English.jpg',
-    'https://images-eu.ssl-images-amazon.com/images/G/31/img22/Wireless/AdvantagePrime/BAU/14thJan/D37196025_IN_WL_AdvantageJustforPrime_Jan_Mob_ingress-banner_1242x450.jpg',
-    'https://images-na.ssl-images-amazon.com/images/G/31/Symbol/2020/00NEW/1242_450Banners/PL31_copy._CB432483346_.jpg',
-    'https://images-na.ssl-images-amazon.com/images/G/31/img21/shoes/September/SSW/pc-header._CB641971330_.jpg',
+    'https://img.freepik.com/free-psd/retro-bazaar-web-template_23-2149052573.jpg?t=st=1715775293~exp=1715778893~hmac=94e118b75f29b92ce378ad2b0c0d8898787dd0eef5af1a9ed0b1d72a280d7987&w=1060',
+    'https://img.freepik.com/free-psd/black-friday-super-sale-web-banner-template_120329-3852.jpg?t=st=1715775150~exp=1715778750~hmac=e3a95f2ce00e4cca5c441801dab25f42623f757ac9d97f2d51aa4ea3c52fb928&w=900',
+    'https://media.istockphoto.com/id/1359380730/photo/technology-and-multimedia-online-shopping-concept.jpg?s=1024x1024&w=is&k=20&c=dzm-NuVf3HSeSYwDj5EW-iAdmRXVvmq8VURN0hg8ZwU=',
+    'https://w7.pngwing.com/pngs/124/695/png-transparent-digital-electronic-products-product-physical-map-digital-electronic-products-phone-thumbnail.png',
   ];
 
   static const List<Map<String, String>> categoryImages = [
@@ -38,7 +38,7 @@ class GlobalVariables {
     },
     {
       'title': 'Essentials',
-      'image': 'assets/images/essentials.jpeg',
+      'image': 'assets/images/glap.png',
     },
     {
       'title': 'Appliances',
@@ -46,11 +46,11 @@ class GlobalVariables {
     },
     {
       'title': 'Books',
-      'image': 'assets/images/books.jpeg',
+      'image': 'assets/images/books.jpg',
     },
     {
       'title': 'Fashions',
-      'image': 'assets/images/fashion.jpeg',
+      'image': 'assets/images/tshirt.png',
     },
   ];
 }

@@ -186,6 +186,8 @@ class _AddressScreenState extends State<AddressScreen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
+          centerTitle: true,
+          title: const Text("Complete Order"),
           flexibleSpace: Container(
             decoration: const BoxDecoration(
               gradient: GlobalVariables.appBarGradient,
@@ -303,7 +305,8 @@ class _AddressScreenState extends State<AddressScreen> {
                 height: 25,
               ),
               CustomButton(
-                text: "Pay4et",
+                backgroundColor: Colors.blueAccent,
+                text: "Pay via telebirr",
                 onPressed: () {
                   payPressed(address);
                 },

@@ -20,3 +20,23 @@ Future<List<File>> pickImages() async {
   }
   return images;
 }
+
+Future<List<Map<dynamic, String>>> pickWebImages() async {
+  List<Map<dynamic, String>> images = [];
+  try {
+    var results = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: true,
+    );
+    if (results != null && results.files.isNotEmpty) {
+      for (var i = 0; i < results.files.length; i++) {
+        final fileBytes = results.files[i].bytes;
+        final fileName = results.files[i].name;
+        images.add(<dynamic, String>{fileBytes: fileName});
+      }
+    }
+  } catch (error) {
+    debugPrint(error.toString());
+  }
+  return images;
+}
