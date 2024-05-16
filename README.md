@@ -1,8 +1,9 @@
 # tijaramart
-![screenshots](https://github.com/AbubekerMohamed/tijaramart/blob/main/screenshots/tijaramart_screens.png?raw=true)
 tijaramart provides a seamless shopping experience for users on the go. Built with Flutter, the app delivers a visually appealing and highly responsive user interface across both iOS and Android platforms. 
 
 The backend of the application is powered by Express.js, a popular Node.js framework, which handles all server-side logic and integrations. The database used is MongoDB, a flexible and scalable NoSQL database, which stores all product information, user accounts, orders, and other relevant data. 
+
+![screenshots](https://github.com/AbubekerMohamed/tijaramart/blob/main/screenshots/tijaramart_screens_cropped.png?raw=true)
 
 ## Key Features: 
 1.Product Browsing and Search: Users can browse products organized into various categories. and has search functionality to help users quickly find the items they're looking for. 
