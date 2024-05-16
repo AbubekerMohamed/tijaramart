@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../common/utils/screen_size_config.dart';
 
-// slim pc ip 192.168.43.29
-// work pc Ethernet adapter Ethernet 172.20.102.160
 const String backendURL = "https://tij-backend-vercel.vercel.app";
 
 class GlobalVariables {

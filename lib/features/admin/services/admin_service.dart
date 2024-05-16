@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:tijaramart/common/components/snackbar.dart';
+import 'package:tijaramart/constants/app_secrets.dart';
 import 'package:tijaramart/constants/error_handlers.dart';
 import 'package:tijaramart/constants/global_variables.dart';
 import 'package:tijaramart/models/admin_model/sale_model.dart';
@@ -25,8 +26,8 @@ class AdminService {
       required List<File> images}) async {
     try {
       final cloudinary = CloudinaryPublic(
-        "dqgqce5fy",
-        "pcldypsv",
+        AppSecrets.cloudinaryName,
+        AppSecrets.cloudinaryKey,
       );
       List<String> imageUrls = [];
       for (var i = 0; i < images.length; i++) {

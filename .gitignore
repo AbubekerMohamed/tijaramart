@@ -44,3 +44,6 @@ app.*.map.json
 
 #Backend dependencies
 /backend/node_modules/
+
+#environment variables
+/lib/constants/app_secrets.dart
