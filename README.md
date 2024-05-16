@@ -46,4 +46,5 @@ The backend of the application is powered by Express.js, a popular Node.js frame
   Adds products
   Controls order status
   Manages all transactions
-
+  
+![screenshotsfull](https://github.com/AbubekerMohamed/tijaramart/blob/main/screenshots/tijaramart_screens.png?raw=true)
