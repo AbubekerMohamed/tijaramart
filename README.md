@@ -4,7 +4,7 @@ tijaramart provides a seamless shopping experience for users on the go. Built wi
 
 The backend of the application is powered by Express.js, a popular Node.js framework, which handles all server-side logic and integrations. The database used is MongoDB, a flexible and scalable NoSQL database, which stores all product information, user accounts, orders, and other relevant data. 
 
-##Key Features: 
+## Key Features: 
 
 1.Product Browsing and Search: Users can browse products organized into various categories. and has search functionality to help users quickly find the items they're looking for. 
 
